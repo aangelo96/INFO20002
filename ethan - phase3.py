@@ -1,5 +1,4 @@
 from csv import DictReader
-
 data = DictReader(open("Edited Data2.csv"))
 data = list(data)
 
@@ -26,14 +25,14 @@ print cols
 html = '''
 <html>
 <head>
+    <link rel="stylesheet" href="pivot.css">
 </head>
 <body>
-    <table>
-        %s
-    </table>
-</body>
-</html>
+    <div id="header">
+        <h1 id = "title">Pivot Table</h1>
+    </div>
 '''
+
 
 table = '<tr><td></td>'
 #First create the first row of the table with the column headers
@@ -46,7 +45,15 @@ for row in range(len(rows)):
         table += '<td> %s</td>' % data[row][col] 
     table += '</tr>'
 
+
+html += '''
+    <div id = "tablediv">
+        <table cellspacing = "0">
+        ''' + table + '''
+        </table>
+    </div>
+    </body>
+</html>
+'''
 with open('output.html', 'w') as output:
-    output.write(html % table)
-
-
+    output.write(html)
