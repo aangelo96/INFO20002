@@ -46,3 +46,9 @@ html {
     height: 60%;
     /*background-color:red;*/
 }
+
+#topbar {
+    width: 100%;
+    height: 10%;
+    background-color: black;
+}

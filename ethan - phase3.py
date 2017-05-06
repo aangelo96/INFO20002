@@ -26,6 +26,11 @@ html = '''
     <link rel="stylesheet" href="pivot.css">
 </head>
 <body>
+    <div id="topbar">
+        <div class = "indexdiv">Hello</div>
+        <div class = "indexdiv"></div>
+        <div class = "indexdiv"></div>
+    </div>
     <div id="header">
         <h1 id = "title">Pivot Table</h1>
     </div>
@@ -43,7 +48,7 @@ table += '<td>Total</td>'
 #Then find the total of each row and add it in
 for row in data:
     row.append(sum(row))
-print data
+
 table += '</tr>'
 
 #Then create the data inside the table.
