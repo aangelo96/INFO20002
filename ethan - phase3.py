@@ -33,21 +33,40 @@ html = '''
 
 
 table = '<tr><td></td>'
+
 #First create the first row of the table with the column headers
 
 for col in cols:
     table += '<td>%s</td>' % col
 table += '<td>Total</td>'
 
+#Then find the total of each row and add it in
 for row in data:
     row.append(sum(row))
-
+print data
 table += '</tr>'
+
+#Then create the data inside the table.
 for row in range(len(rows)):
     table += '<tr><td>%s</td>' % rows[row]
-    for col in range(len(cols)):
+    for col in range(len(cols)+1):
         table += '<td> %s</td>' % data[row][col] 
     table += '</tr>'
+
+#Then, we add the total of each column and write it in.
+table += '<tr><td>Total</td>'
+# for row in range(len(data)):
+#     total = 0
+#     for col in range(len(data[0])):
+#         total += 
+
+for row in range(len(data[0])):
+    total = 0
+    for col in range(len(data)):
+        total += data[col][row]
+
+    table += '<td>%s</td>' % str(total)
+table +='</tr>'
 
 
 html += '''

@@ -18,10 +18,12 @@ td {
 }*/
 tr:nth-child(1) {
     background-color: #a6bddb;
+    font-weight: bold;
 }
 
 td:nth-child(1) {
     background-color: #a6bddb;
+    font-weight: bold;
 }
 
 #header{
