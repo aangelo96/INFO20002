@@ -23,16 +23,18 @@ data = [[1,19,31,4],[18,67,41,12]]
 html = '''
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="pivot.css">
 </head>
 <body>
     <div id="topbar">
-        <div class = "indexdiv">Home</div>
-        <div class = "indexdiv">Pivot Table Builder</div>
-        <div class = "indexdiv">Insights</div>
+        <div class = "indexdiv"><span>Home</span></div>
+        <div class = "indexdiv"><span>Pivot Table Builder</span></div>
+        <div class = "indexdiv"><span>Insights</span></div>
     </div>
     <div id="header">
-        <h1 id = "title">Pivot Table</h1>
+        <h1 id = "title">Pivot Table<img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/></h1> 
+        <h3>A comparison of absences with respect to Age and Sex</h3>
     </div>
 '''
 
