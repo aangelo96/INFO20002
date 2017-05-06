@@ -18,8 +18,6 @@ rows.sort()
 cols.sort()
 
 data = [[1,19,31,4],[18,67,41,12]]
-print rows
-print cols
 
 
 html = '''
@@ -36,8 +34,14 @@ html = '''
 
 table = '<tr><td></td>'
 #First create the first row of the table with the column headers
+
 for col in cols:
     table += '<td>%s</td>' % col
+table += '<td>Total</td>'
+
+for row in data:
+    row.append(sum(row))
+
 table += '</tr>'
 for row in range(len(rows)):
     table += '<tr><td>%s</td>' % rows[row]

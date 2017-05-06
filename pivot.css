@@ -1,9 +1,10 @@
 table {
     cellspacing: 0;
+    margin: auto;
 }
 
 td {
-    padding: 2px 5px;
+    padding: 5px 10px;
     /*margin: 20px 20px 20px 20px;*/
     font-family: Arial;
 }
@@ -40,5 +41,6 @@ html {
 
 #tablediv {
     width:100%;
-    background-color:red;
+    height: 60%;
+    /*background-color:red;*/
 }
