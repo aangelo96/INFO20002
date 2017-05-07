@@ -62,17 +62,12 @@ for row in range(len(rows)):
 
 #Then, we add the total of each column and write it in.
 table += '<tr><td>Total</td>'
-# for row in range(len(data)):
-#     total = 0
-#     for col in range(len(data[0])):
-#         total += 
 
 for row in range(len(data[0])):
     total = 0
     for col in range(len(data)):
         total += data[col][row]
-
-    table += '<td>%s</td>' % str(total)
+    table += '<td><strong>%s</strong></td>' % str(total)
 table +='</tr>'
 
 
