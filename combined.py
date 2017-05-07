@@ -507,6 +507,29 @@ def handler():
 
   return body % (row,column)
 
+
+def colorgen(num, bins):
+  #Color list is from colorbrewer2.org
+  colors = ['#f7fbff','#deebf7','#c6dbef','#9ecae1','#6baed6','#4292c6','#2171b5','#084594']
+  for i in range(len(bins)):
+    if num <= bins[i]:
+      return colors[i]
+
+def createbins(minnum, maxnum):
+  BINNUM = 7
+  binrange = maxnum - minnum
+  split = binrange/BINNUM
+  bins = []
+  for i in range(BINNUM):
+    bins.append(maxnum)
+    maxnum = maxnum-split
+  bins.sort()
+  return bins
+
+
+
+
+
 @app.route('/pivottable')
 def pivot():
     data = DictReader(open("Edited Data2.csv"))
@@ -529,6 +552,14 @@ def pivot():
 
     data = [[1,19,31,4],[18,67,41,12]]
 
+    #Find the smallest and largest numbers in the data set.
+    maxnum = minnum = data[0][0]
+    for row in data:
+      if min(row) < minnum:
+        minnum = min(row)
+      if max(row) > maxnum:
+        maxnum = max(row)
+    bins = createbins(minnum, maxnum)
 
     html = '''
     <html>
@@ -538,9 +569,9 @@ def pivot():
     </head>
     <body>
         <div id="topbar">
-            <div class = "indexdiv"><span>Home</span></div>
-            <div class = "indexdiv"><span>Pivot Table Builder</span></div>
-            <div class = "indexdiv"><span>Insights</span></div>
+            <div class = "indexdiv"><span><a href="/">Home</a></span></div>
+            <div class = "indexdiv"><span><a href="/filter">Pivot Table Builder</a></span></div>
+            <div class = "indexdiv"><span><a href="http://www.nyan.cat">Insights</a></span></div>
         </div>
         <div id="header">
             <h1 id = "title">Pivot Table<img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/></h1> 
@@ -564,10 +595,16 @@ def pivot():
     table += '</tr>'
 
     #Then create the data inside the table.
+    
     for row in range(len(rows)):
         table += '<tr><td>%s</td>' % rows[row]
         for col in range(len(cols)+1):
-            table += '<td> %s</td>' % data[row][col] 
+            lastcol = len(rows[0])
+            if data[row][col] != data[row][-1]:
+              table += ('<td bgcolor="'
+              + colorgen(data[row][col], bins) +'"> %s</td>' % data[row][col] )
+            else:
+              table += '<td>%s</td>' % data[row][col]
         table += '</tr>'
 
     #Then, we add the total of each column and write it in.
