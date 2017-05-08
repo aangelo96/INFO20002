@@ -288,7 +288,7 @@ function sortTable(n) {
 </body>
 </html>
 '''
-    with open("Edited Data2.csv", "rb") as csvfile :
+    with open("EditedData3.csv", "rb") as csvfile :
         counter = 0
         counter2 = 0
         data = csv.reader(csvfile, delimiter=",")
@@ -532,7 +532,7 @@ def createbins(minnum, maxnum):
 
 @app.route('/pivottable')
 def pivot():
-    data = DictReader(open("Edited Data2.csv"))
+    data = DictReader(open("EditedData3.csv"))
     data = list(data)
 
 
