@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sun Apr 30 13:36:41 2017
-
 @author: Arnold,Ethan,Juday
 """
 import csv
 from csv import DictReader
 from flask import Flask,request
-
 app = Flask(__name__, static_folder='.', static_url_path='')
 
 @app.route('/')
@@ -19,74 +17,11 @@ def route():
     <title>Pivot Table - Filters</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <style>
-    h1 {
-            font-family:serif;
-            font:bookman;
-            color : white;
-            }
-    h2 {
-            font-family:serif;
-            font:bookman;
-            color : black;
-            background-color: grey;
-            border-radius: 8px;
-            }
-    
-    p {
-        font-family:fantasy;
-        font:Impact;
-        font-size:20px;
-        color:white;
-        text-align:center;}
-    
-    #left,#right {
-        text-align:center;}
-    
-    .left_button {
-        background-color:orange;
-        
-    }
-    
-    .right_button {
-        background-color:blue;
-        
-    }
-    
-    .left_button:hover {
-        opacity:1;
-    }
-    
-    .right_button:hover {
-        opacity:1;
-    }
-    
-    body {
-            background-image: url("jadon-barnes-1446.jpg");
-            opacity:0.9;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            height:100%;
-    }
-    
-    button { font-family:serif;
-        font:bookman;
-        font-weight:400;
-        color:white; 
-        border:0;
-        border-radius:5px;
-        padding: 6px 20px;
-        opacity:0.9;
-        align-items:center;
-    }
-    
-
-    </style>
+    <link rel="stylesheet" href="homepagefinal.css">
     
 </head>
 <body>
-<h1 align="center"> Alcoholic Data Set and Pivot Table Builder </h1>
+<h1 align="center"> Alcoholic Data Set and Pivot Table Builder <img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/> </h1>
 <br>
 <hr>
 <br>
@@ -133,164 +68,61 @@ def fulldata():
     <title>Pivot Table - Filters</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <style>
-    h1 {
-            font-family:serif;
-            font:bookman;
-            color : black;
-            }
-    
-    #left,#right {
-        text-align:center;}
-    
-    .left_button {
-        background-color:orange;
-        
-    }
-    
-    .right_button {
-        background-color:blue;
-        
-    }
-    
-    .left_button:hover {
-        opacity:1;
-    }
-    
-    .right_button:hover {
-        opacity:1;
-    }
-    
-    
-    body {
-            background-color: grey;
-            opacity:0.9;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            height:100vh;
-    }
-    
-    button { font-family:serif;
-        font:bookman;
-        font-weight:400;
-        color:white; 
-        border:0;
-        border-radius:5px;
-        padding: 6px 20px;
-        opacity:0.9;
-        align-items:center;
-    }
-    
-    .wrapper {
-        text-align:center;
-        color:white;
-        }
-    
-    td,th {
-        padding:10px;
-        border-width:10px;
-        background-color:white;
-        color:black;
-        }
-    
-    </style>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="fulldatafinal.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
     
 </head>
 <body>
-<h1 align="center"> Full Student Alcohol Consumption Data Set </h1>
+<h1 align="center"> Full Student Alcohol Consumption Data Set <img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/></h1>
 <br>
 <hr>
 <br>
-<p align="center"> *Click Headers For Sort Ascending <p>
-<p align="center"> **One more click to Sort Descending <p>
+<p align=center> <span style="color:red;">*red</span> = Underage Alcoholics !!! </p>
 <br>
+<div class="row">
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-0">
+</div>
+<div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
 <div class="wrapper">
 %s
 </div>
-<script>
-/*Cited From : https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_sort_table_desc */
-function sortTable(n) {
-  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("myTable");
-  switching = true;
-  //Set the sorting direction to ascending:
-  dir = "asc"; 
-  /*Make a loop that will continue until
-  no switching has been done:*/
-  while (switching) {
-    //start by saying: no switching is done:
-    switching = false;
-    rows = table.getElementsByTagName("TR");
-    /*Loop through all table rows (except the
-    first, which contains table headers):*/
-    for (i = 1; i < (rows.length - 1); i++) {
-      //start by saying there should be no switching:
-      shouldSwitch = false;
-      /*Get the two elements you want to compare,
-      one from current row and one from the next:*/
-      x = rows[i].getElementsByTagName("TD")[n];
-      y = rows[i + 1].getElementsByTagName("TD")[n];
-      /*check if the two rows should switch place,
-      based on the direction, asc or desc:*/
-      if (dir == "asc") {
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch= true;
-          break;
-        }
-      } else if (dir == "desc") {
-        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch= true;
-          break;
-        }
-      }
-    }
-    if (shouldSwitch) {
-      /*If a switch has been marked, make the switch
-      and mark that a switch has been done:*/
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-      //Each time a switch is done, increase this count by 1:
-      switchcount ++;      
-    } else {
-      /*If no switching has been done AND the direction is "asc",
-      set the direction to "desc" and run the while loop again.*/
-      if (switchcount == 0 && dir == "asc") {
-        dir = "desc";
-        switching = true;
-      }
-    }
-  }
-}
-</script>
-
+</div>
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-0">
+</div>
+</div>
 <br>
 <div class="container">
     <div class="row">
-        <form action="/">
-            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" id="left">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" id="left">
+            <form action="/">        
                 <button type="submit" class="left_button"><b> Go Back To Main Page </b></button>
+            </form>
             </div>
-        </form>
         <br>
         <br>
-        <br>
-        <form action="filter">
-            <div class="col-md-12 col-lg-12 col-sm-12 col xs-12" id="right">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" id="right">
+            <form action="filter">
                 <button type="submit" class="right_button"><b> Go To Pivot Table Generator </b></button>
-            </div>
-        </form>
+            </form>
+        </div>
+        <br><br>
     </div>
-</div>
-
+</div><script src="bubblesorteds2.js"></script>
 </body>
 </html>
 '''
     with open("EditedData3.csv", "rb") as csvfile :
+<<<<<<< HEAD
         counter = 0
         counter2 = 0
+=======
+        """Counter for Row"""
+        counter = 0 
+        """Counter for Column"""
+        counter2 = 0 
+>>>>>>> 41ba6510e152cc290acb1e126116812d9e06eb4d
         data = csv.reader(csvfile, delimiter=",")
         table = '<table border="10" align="center" id="myTable">'
         for row in data :
@@ -300,12 +132,41 @@ function sortTable(n) {
                 table += '<tr>'
             for column in row :
                  if (counter==0) :
-                     table+= '<th onclick="sortTable('+str(counter2)+')">'+column+'</th>'
+                     asc = 0
+                     desc = 1
+                     table+= '<th>'+column+'<span class="glyphicon glyphicon-chevron-up" onClick="bubbleSort('+str(counter2)+','+str(asc)+')"></span><span class="glyphicon glyphicon-chevron-down" onClick="bubbleSort('+str(counter2)+','+str(desc)+')"></span></th>'
                      counter2 = counter2 + 1
                  else :
-                     table+= '<td>'+column+'</td>'
+                     if ((counter2)==5 or (counter2)==6):
+                         table+= '<td>'+column+'<img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/></td>'   
+                         counter2 = counter2 + 1
+                     elif (counter2==0) :
+                         if (column=="F") :
+                             table+= '<td style="background-color:pink;">'+column+'</td>'  
+                             counter2 = counter2 + 1
+                         else :
+                             table+= '<td style="background-color:lightblue;">'+column+'</td>'  
+                             counter2 = counter2 + 1
+                     elif (counter2==1) :
+                         if (int(column)<18) :
+                             table+= '<td style="background-color:red;">'+column+'</td>'  
+                             counter2 = counter2 + 1
+                         else :
+                             table+= '<td>'+column+'</td>'  
+                             counter2 = counter2 + 1
+                     elif (counter2==2) :
+                         if (column=="A") :
+                             table+= '<td>'+column+'<i class="em em-bust_in_silhouette"></i></td>'  
+                             counter2 = counter2 + 1
+                         else :
+                             table+= '<td>'+column+'<i class="em em-busts_in_silhouette"></i></td>'  
+                             counter2 = counter2 + 1
+                     else :
+                         table+= '<td>'+column+'</td>'
+                         counter2 = counter2 + 1
             table += '</tr>'
             counter=counter+1
+            counter2=0;
         table += '</table>'
     
 
@@ -317,71 +178,29 @@ def filtering():
 <!doctype html>
 <html>
 <head>
-    <title>Pivot Table - Filters</title>>
+    <title>Pivot Table - Filters</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <style>
-    h1 {
-            font-family:serif;
-            font:bookman;
-            color : white;}
-    p {
-        font-family:fantasy;
-        font:Impact;
-        font-size:20px;
-        color:white;}
-    
-    input,select {
-            border-radius:5px;
-            padding: 6px 10px;
-        }
-    
-    body {
-            background-image: url("jadon-barnes-1446.jpg");
-            opacity:0.9;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            height:100vh;
-        }
-    
-    .container,col,row,body {
-            min-width:500px;}
-    
-    #subbutton { font-family:serif;
-        font:bookman;
-        font-weight:400;
-        background-color:grey;
-        color:white; 
-        border:0;
-        border-radius:5px;
-        padding: 6px 20px;
-        opacity:0.8;
-    }
-    
-    #subbutton:hover {
-        opacity:1;    
-    }
-    </style>
+    <link rel="stylesheet" href="filtersfinal.css">
     
 </head>
 <body>
-<h1 align="center"> Alcoholic Pivot Table Builder </h1>
+<h1 align="center"> Alcoholic Pivot Table Builder <img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/></h1>
 <br>
 <hr>
 <br>
 <br>
-<form method="post" action="handler">
   <div class="container"> 
   <div class="row">
+      <form method="post" action="handler">
       <div class="col-md-4 col-lg-3 col-sm-6 col-xs-6"> 
-          <p>Report Filter :</p>
+          <p><b>Report Filter :</b></p>
           <select name="filter-sect">
-          <option value="age"> Age </option>
-          <option value="sex"> Sex </option>
-          <option value="pstatus"> Parent Cohabitation Status </option>
-          <option value="dalc"> Daily Alcohol Consumption </option>
-          <option value="walc"> Weekly Alcohol Consumption </option>
+          <option value="Age"> Age </option>
+          <option value="Sex"> Sex </option>
+          <option value="Parent Cohabitation Status"> Parent Cohabitation Status </option>
+          <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
+          <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
           </select>
           <br>
           <br>
@@ -403,36 +222,44 @@ def filtering():
           
       </div>
       <div class="col-md-4 col-lg-3 col-sm-6 col-xs-6"> 
-          <p>Select Row :</p>
+          <p><b>Select Row :</b></p>
           <select name="myrow">
-          <option value="age"> Age </option>
-          <option value="sex"> Sex </option>
-          <option value="pstatus"> Parent Cohabitation Status </option>
-          <option value="dalc"> Daily Alcohol Consumption </option>
-          <option value="walc"> Weekly Alcohol Consumption </option>
+          <option value="Age"> Age </option>
+          <option value="Sex"> Sex </option>
+          <option value="Parent Cohabitation Status"> Parent Cohabitation Status </option>
+          <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
+          <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
           </select>
           <br><br>
       </div>  
       <div class="col-md-4 col-lg-3 col-sm-6 col-xs-6"> 
-          <p>Select Column :</p>
+          <p><b>Select Column :</b></p>
           <select name="mycol">
-          <option value="sex"> Sex </option>
-          <option value="age"> Age </option>
-          <option value="pstatus"> Parent Cohabitation Status </option>
-          <option value="dalc"> Daily Alcohol Consumption </option>
-          <option value="walc"> Weekly Alcohol Consumption </option>
+          <option value="Sex"> Sex </option>
+          <option value="Age"> Age </option>
+          <option value="Parent Cohabitation Status"> Parent Cohabitation Status </option>
+          <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
+          <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
           </select>
           <br><br>
       </div> 
       <div class="col-md-4 col-lg-3 col-sm-6 col-xs-6"> 
-          <p>Aggregation :</p>
+          <p><b>Aggregation :</b></p>
+          <select name="agg_calc">
+          <option value="countof"> Count Of </option>
+          <option value="sumof"> Sum Of </option>
+          <option value="avgof"> Average Of </option>
+          <option value="minof"> Minimum Of </option>
+          <option value="maxof"> Maximum Of </option>
+          </select>
+          <br><br>
           <select name="agg">
-          <option value="absenses"> Number of Absenses </option>
-          <option value="g3"> Average Grade </option>
-          <option value="failures"> Number of Failure Subjects </option>
-          <option value="studytime"> Study Time </option>
-          <option value="dalc"> Daily Alcohol Consumption </option>
-          <option value="walc"> Weekly Alcohol Consumption </option>
+          <option value="Number of Absences"> Number of Absences </option>
+          <option value="Average Grade"> Average Grade </option>
+          <option value="Number of Failed Subjects"> Number of Failed Subjects </option>
+          <option value="Study time"> Study Time </option>
+          <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
+          <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
           </select>
           <br><br>
       </div>
@@ -442,13 +269,21 @@ def filtering():
           <br>
           <hr>
           <p align="center">
-          <input align="center" id="subbutton" type="submit" />
+          <input align="center" id="subbutton" type="submit"/>
           </p> 
-        </div>  
+          <br>
+      </div>
+      </form>
+      <form action="/"> 
+      <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" id="bottom">
+          <button type="submit" class="homebutton"><b>Go Back To Main Page</b></button>
+          <br><br>
+      </div>
+      </form>
+      
   </div>
   </div>
   
-</form>
 </body>
 </html>
 '''
@@ -456,6 +291,7 @@ def filtering():
 
 @app.route('/handler', methods=['POST'])
 def handler():
+<<<<<<< HEAD
   body = '''
 <!doctype html>
 <html>
@@ -534,10 +370,21 @@ def createbins(minnum, maxnum):
 def pivot():
     data = DictReader(open("EditedData3.csv"))
     data = list(data)
+=======
+  data = DictReader(open("EditedData3.csv"))
+  data = list(data)
+>>>>>>> 41ba6510e152cc290acb1e126116812d9e06eb4d
 
+  #filter_sector = request.form['filter-sect']
+  #filter_sign = request.form['filter-sign']
+  #filter_value = request.form['filter-value']
+  #row = request.form['myrow']
+  #column = request.form['mycol']
+  #aggregation_value = request.form['agg']
 
     #Row is Sex
     #Column is Age
+<<<<<<< HEAD
     rows = []
     cols = []
     for i in range(0,100):
@@ -578,22 +425,64 @@ def pivot():
             <h3>A comparison of absences with respect to Age and Sex</h3>
         </div>
     '''
+=======
+  rows = []
+  cols = []
+  for i in range(0,100):
+    if data[i]['Sex'] not in rows:
+        rows.append(data[i]['Sex'])
+
+    if data[i]['Age'] not in cols:
+        cols.append(data[i]['Age'])
+ 
+  rows.sort()
+  cols.sort()
+
+  data = [[1,19,31,4],[18,67,41,12]]
 
 
-    table = '<tr><td></td>'
+  html = '''
+  <html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="pivot.css">
+  </head>
+  <body>
+    <div id="topbar">
+        <div class = "indexdiv"><span>Home</span></div>
+        <div class = "indexdiv"><span>Pivot Table Builder</span></div>
+        <div class = "indexdiv"><span>Insights</span></div>
+    </div>
+    <div id="header">
+        <h1 id = "title">Pivot Table<img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/></h1> 
+        <h3>A comparison of absences with respect to Age and Sex</h3>
+    </div>
+  '''
 
-    #First create the first row of the table with the column headers
+>>>>>>> 41ba6510e152cc290acb1e126116812d9e06eb4d
 
-    for col in cols:
-        table += '<td>%s</td>' % col
-    table += '<td>Total</td>'
+  table = '<tr><td></td>'
 
-    #Then find the total of each row and add it in
-    for row in data:
-        row.append(sum(row))
+  #First create the first row of the table with the column headers
 
+  for col in cols:
+    table += '<td>%s</td>' % col
+  table += '<td>Total</td>'
+
+  #Then find the total of each row and add it in
+  for row in data:
+    row.append(sum(row))
+
+  table += '</tr>'
+
+  #Then create the data inside the table.
+  for row in range(len(rows)):
+    table += '<tr><td>%s</td>' % rows[row]
+    for col in range(len(cols)+1):
+        table += '<td> %s</td>' % data[row][col] 
     table += '</tr>'
 
+<<<<<<< HEAD
     #Then create the data inside the table.
     
     for row in range(len(rows)):
@@ -609,26 +498,31 @@ def pivot():
 
     #Then, we add the total of each column and write it in.
     table += '<tr><td>Total</td>'
+=======
+  #Then, we add the total of each column and write it in.
+  table += '<tr><td>Total</td>'
+>>>>>>> 41ba6510e152cc290acb1e126116812d9e06eb4d
 
-    for row in range(len(data[0])):
-        total = 0
-        for col in range(len(data)):
-            total += data[col][row]
-        table += '<td><strong>%s</strong></td>' % str(total)
-    table +='</tr>'
+  for row in range(len(data[0])):
+    total = 0
+    for col in range(len(data)):
+        total += data[col][row]
+    table += '<td><strong>%s</strong></td>' % str(total)
+  table +='</tr>'
 
 
-    html += '''
-        <div id = "tablediv">
-            <table cellspacing = "0">
-            ''' + table + '''
-            </table>
-        </div>
-        </body>
-    </html>
-    '''
+  html += '''
+    <div id = "tablediv">
+        <table cellspacing = "0">
+        ''' + table + '''
+        </table>
+    </div>
+    </body>
+  </html>
+  '''
+    
+  return html
 
-    return html
 
 if __name__ == "__main__":
     app.run(debug=True, host='127.0.0.1', port=80)
