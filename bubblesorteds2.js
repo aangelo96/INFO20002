@@ -9,11 +9,11 @@ function checkInt(x) {
   }
 }
 
+//Table sorter using bubblesort (1 indicates ascending, 0 indicates descending)
 function bubbleSort(n,dir) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("myTable");
   switching = true;
-  //Set the sorting direction to ascending:
   rows = table.getElementsByTagName("TR");
   len = rows.length;
   while (switching) {
@@ -24,14 +24,14 @@ function bubbleSort(n,dir) {
       if (checkInt(x.innerHTML)) {
         if (dir == 0) {
           if (parseInt(x.innerHTML) >parseInt(y.innerHTML)) {
-            //if so, mark as a switch and break the loop:
+            //switch position
             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
             switching = true;
           }
         }
         else if (dir == 1) {
           if (parseInt(x.innerHTML) < parseInt(y.innerHTML)) {
-            //if so, mark as a switch and break the loop:
+            //switch position
             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
             switching = true;
           }
@@ -40,14 +40,14 @@ function bubbleSort(n,dir) {
       else {
         if (dir == 0) {
           if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-            //if so, mark as a switch and break the loop:
+            //switch position
             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
             switching = true;
           }
         }
         else if (dir == 1) {
           if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-            //if so, mark as a switch and break the loop:
+            //switch position
             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
             switching = true;
           }
