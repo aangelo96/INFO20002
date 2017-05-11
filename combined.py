@@ -177,6 +177,8 @@ def filtering():
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="filtersfinal.css">
+   
+    
     
 </head>
 <body>
@@ -188,9 +190,24 @@ def filtering():
   <div class="container"> 
   <div class="row">
       <form method="post" action="handler">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+          <script>
+          $(document).ready(function () {
+            $("#filter-sect").change(function () {
+                var val = $(this).val();
+                if (val == "Sex" || val == "Age" || val == "Parent Cohabitation Status") {
+                    $("#filter-sign").html("<option value='any'> is anything </option><option value='equal'> = </option> <option value='notequal'> != </option> <option value='contains'> contains </option> <option value='not-contains'> not contains </option>");
+                } else {
+                    $("#filter-sign").html("<option value='any'> is anything </option><option value='equal'> = </option> <option value='notequal'> != </option> <option value='contains'> contains </option> <option value='not-contains'> not contains </option><option value='notequal'> != </option> <option value='bigger'> > </option> <option value='smaller'> < </option> <option value='bigger-equal'> >= </option> <option value='smaller-equal'> >= </option>");
+                }
+                
+            });
+          });
+          </script>
       <div class="col-md-4 col-lg-3 col-sm-6 col-xs-6"> 
           <p><b>Report Filter :</b></p>
-          <select name="filter-sect">
+          
+          <select name="filter-sect" id="filter-sect">
           <option value="Age"> Age </option>
           <option value="Sex"> Sex </option>
           <option value="Parent Cohabitation Status"> Parent Cohabitation Status </option>
@@ -199,17 +216,17 @@ def filtering():
           </select>
           <br>
           <br>
-          <select name="filter-sign">
+          
+          <select name="filter-sign" id="filter-sign">
           <option value="any"> is anything </option>
           <option value="equal"> = </option>
-          <option value="bigger"> > </option>
-          <option value="smaller"> < </option>
-          <option value="bigger-equal"> >= </option>
-          <option value="smaller-equal"> >= </option>
+          <option value="notequal"> != </option>
           <option value="contains"> contains </option>
           <option value="not-contains"> does not contain </option>
-          <option value="istrue"> is True </option>
-          <option value="isfalse"> is False </option>
+          <!-- <option value="bigger"> > </option>
+          <option value="smaller"> < </option>
+          <option value="bigger-equal"> >= </option>
+          <option value="smaller-equal"> >= </option> !-->
           </select>
           <br><br>
           <input type="text" name="filter-value" placeholder="Filter Value" value="">
@@ -348,7 +365,7 @@ def handler():
     <html>
     <head>
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-        <link rel="stylesheet" href="pivot.css">
+        <link rel="stylesheet" href="pivotesfinals.css">
     </head>
     <body>
         <div id="topbar">
