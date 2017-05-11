@@ -1,4 +1,4 @@
-Sex,Age,Parent status,Study time,Failures,Daily Alcohol Intake,Weekly Alcohol Intake,School Absences,Average Grade
+Sex,Age,Parent Cohabitation Status,Study time, Number of Failed Subjects,Daily Alcohol Consumption,Weekly Alcohol Consumption,Number of Absences,Average Grade
 F,18,A,2,0,1,1,6,6
 F,17,T,2,0,1,1,4,6
 F,15,T,2,3,2,3,10,10
