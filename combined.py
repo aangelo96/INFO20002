@@ -329,11 +329,15 @@ def filtering():
 def colorgen(num, bins):
   #Color list is from colorbrewer2.org
   colors = ['#f7fbff','#deebf7','#c6dbef','#9ecae1','#6baed6','#4292c6','#2171b5','#084594']
+  #Decide which color group the number is in based on its bin.
   for i in range(len(bins)):
     if num <= bins[i]:
       return colors[i]
 
 def createbins(minnum, maxnum):
+
+  #Calculate the range of data, then create a list of numbers
+  #that represent the threshold for each bin.  
   BINNUM = 7
   binrange = maxnum - minnum
   split = binrange/BINNUM
@@ -625,7 +629,6 @@ def handler():
     <head>
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
         <link rel="stylesheet" href="final_pivot.css">
-       
     </head>
     <body>
         <div id="topbar">
@@ -638,8 +641,8 @@ def handler():
             
         </div>
         <div id="about">
-            <h3>A comparison of the <span id="details">%s</span> : <span id="details">%s</span></h3>
-            <h3>With respect to <span id="details">%s</span> and <span id="details">%s</span></h3>
+            <h3>A comparison of <span id="details">%s</span> and <span id="details">%s</span></h3>
+            <h3>With respect to the <span id="details">%s</span> : <span id="details">%s</span></h3>
             <h3>When %s %s %s</span></h3>
         <hr>
     '''
@@ -708,7 +711,7 @@ def handler():
     
     
     print(data_array)
-    return html % (agg_op,agg_val,irow,icol,fil_sect,fil_sign,fil_val)
+    return html % (irow,icol,agg_op, agg_val,fil_sect,fil_sign,fil_val)
     
 
 
