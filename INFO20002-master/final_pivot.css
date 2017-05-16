@@ -85,3 +85,28 @@ h3 {
 #details {
   color: red;
 }
+
+#contentdiv {
+  /*display: inline-block;*/
+  overflow: hidden;
+
+}
+#tablediv {
+    width: 70%;
+    float: left;
+}
+
+#keydiv {
+  text-align: left;
+  width: 30%;
+  clear: right;
+  display: inline-block;
+}
+
+#keydiv h3 {
+  text-align: left;
+}
+
+p {
+  font-family: 'Raleway', sans-serif;
+}

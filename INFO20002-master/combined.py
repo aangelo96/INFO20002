@@ -646,7 +646,8 @@ def handler():
             <h3>When %s %s %s</span></h3>
         <hr>
     '''
-    html += '<div id="contentdiv">'          
+    html += '<div id="contentdiv">'  
+    html += '<div id="tablediv">'        
     html += '<table id="myTable"><tr><td></td>'
     #Add Column Tag
     for col in cols :
@@ -708,6 +709,12 @@ def handler():
 
     html += '''
     </table>
+    </div>
+    <div id = "keydiv">
+        <h3>Columns:\n</h3>
+        <p>hello</p>
+        <h3>Rows:</h3>
+    </div>
     </div>
     '''
     html += '</body></html>'
