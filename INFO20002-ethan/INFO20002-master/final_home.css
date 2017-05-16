@@ -1,0 +1,77 @@
+h1,h2 {
+    font-family: 'Raleway', sans-serif;
+    color : black;
+}
+h2 {
+    background-color: white;
+    border-radius: 8px;
+}
+
+p {
+    font-family: 'Raleway', sans-serif;
+    font-size:20px;
+    color:black;
+    text-align:center;
+}
+
+#aop {
+    padding-left: 10px;
+    text-align:left;
+}
+
+ul {
+  font-size:18px;
+}
+
+ol {
+  font-size:15px;
+}
+
+#left,#right {
+    text-align:center;
+}
+
+.left_button {
+    background-color:orange;
+}
+
+.right_button {
+    background-color:blue;
+}
+
+.left_button:hover,.right_button:hover {
+    opacity:1;
+}
+
+body {
+    background-color:#EFEFEF;
+    opacity:0.9;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height:100vh;
+}
+
+button {
+    font-family:serif;
+    font:bookman;
+    font-weight:400;
+    color:white;
+    border:0;
+    border-radius:5px;
+    padding: 6px 20px;
+    opacity:0.8;
+    align-items:center;
+}
+
+#beer {
+    width: 50px;
+    height: 50px;
+    padding-left: 10px;
+    /*padding-top: 10px;*/
+    position: relative;
+}
+
+hr {
+  border-color: orange;
+}
