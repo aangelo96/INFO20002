@@ -41,8 +41,8 @@ def route():
              <li> Parents Cohabitation Status </li>
              <li> Study Time </li>
              <li> Number of Failed Subject </li>
-             <li> Daily Alcohol Consumption </li>
-             <li> Weekly Alcohol Consumption </li>
+             <li> Weekday Alcohol Consumption </li>
+             <li> Weekend Alcohol Consumption </li>
              <li> Number of Absences </li>
              <li> Average Grade </li>
          </ol>
@@ -77,6 +77,37 @@ def route():
     <p> Jorjilou Reyes - 836917 </p>
     <br>
     <hr>
+</body>
+</html>
+'''
+    return home_page
+
+@app.route('/home')
+def homeroute():
+    home_page = '''
+<!doctype html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="final_home2.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+</head>
+</body>
+    <div id="bodydiv">
+        <div id="titlediv">
+            <h3>Student Alcohol Consumption </h3>
+            <img src="https://stevenchasestudios.files.wordpress.com/2012/06/kopandawm.png" 
+            title = "Picture from Steven Chase Studios"/>
+        </div>
+        <div id="linkbar">
+            <div class="link"><a href="/">About Us</a></div>
+            <div class="link"><a href="/filter">Pivot Table Builder</a></div>
+            <div class="link"><a href="/insights">Insights</a></div>
+            <div class="link"><a href="/fulldata">Data</a></div>
+        </div>
+    </div>
 </body>
 </html>
 '''
@@ -234,8 +265,9 @@ def filtering():
           <option value="Age"> Age </option>
           <option value="Sex"> Sex </option>
           <option value="Parent Cohabitation Status"> Parent Cohabitation Status </option>
-          <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
-          <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
+          <option value="Weekday Alcohol Consumption"> Weekday Alcohol Consumption </option>
+          <option value="Weekend Alcohol Consumption"> Weekend Alcohol Consumption </option>
+          <option value="Quality of Family Relationships">Quality of Family Relationships</option>
           </select>
           <br>
           <br>
@@ -262,8 +294,9 @@ def filtering():
           <option value="Age"> Age </option>
           <option value="Sex"> Sex </option>
           <option value="Parent Cohabitation Status"> Parent Cohabitation Status </option>
-          <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
-          <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
+          <option value="Weekday Alcohol Consumption"> Weekday Alcohol Consumption </option>
+          <option value="Weekend Alcohol Consumption"> Weekend Alcohol Consumption </option>
+          <option value="Quality of Family Relationships">Quality of Family Relationships</option>
           </select>
           <br><br>
       </div>  
@@ -273,8 +306,9 @@ def filtering():
           <option value="Sex"> Sex </option>
           <option value="Age"> Age </option>
           <option value="Parent Cohabitation Status"> Parent Cohabitation Status </option>
-          <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
-          <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
+          <option value="Weekday Alcohol Consumption"> Weekday Alcohol Consumption </option>
+          <option value="Weekend Alcohol Consumption"> Weekend Alcohol Consumption </option>
+          <option value="Quality of Family Relationships">Quality of Family Relationships</option>
           </select>
           <br><br>
       </div> 
@@ -293,8 +327,9 @@ def filtering():
           <option value="Average Grade"> Average Grade </option>
           <option value="Number of Failed Subjects"> Number of Failed Subjects </option>
           <option value="Study time"> Study Time </option>
-          <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
-          <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
+          <option value="Weekday Alcohol Consumption"> Weekday Alcohol Consumption </option>
+          <option value="Weekend Alcohol Consumption"> Weekend Alcohol Consumption </option>
+          <option value="Quality of Family Relationships">Quality of Family Relationships</option>
           </select>
           <br><br>
       </div>
@@ -603,8 +638,9 @@ def keygen(irow,icol):
     'Age': ['Numeric from 15-22',],
     'Sex': ['F - Female', 'M - Male',],
     'Parent Cohabitation Status': ['T - Living Together', 'A - Living Apart'],
-    'Daily Alcohol Consumption': ['From 1-5', '1 - Very Low', '5- Very High'],
-    'Weekly Alcohol Consumption': ['From 1-5', '1 - Very Low', '5- Very High'],
+    'Weekday Alcohol Consumption': ['From 1-5', '1 - Very Low', '5- Very High'],
+    'Weekend Alcohol Consumption': ['From 1-5', '1 - Very Low', '5- Very High'],
+    'Quality of Family Relationships': ['From 1-5', '1 - Very Low', '5- Very High']
     }
 
     keyhtml = '''<div id = "keydiv">
@@ -668,7 +704,7 @@ def handler():
         <div id="topbar">
             <div class = "indexdiv"><a href="/"><span id="top">Home</span></a>
             <a href="/filter"><span id="top">Pivot Table Builder</span></a>
-            <a href="http://www.nyan.cat"><span id="top">Insights</span></a></div>
+            <a href="/insights"><span id="top">Insights</span></a></div>
         </div>
         <div id="header">
             <h1 id = "title">Pivot Table<img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/></h1> 
@@ -758,6 +794,78 @@ def handler():
     return html % (irow,icol,agg_op, agg_val,fil_sect,fil_sign,fil_val)
     
 
+
+@app.route('/insights')
+def insights():
+    html = '''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <script src="/jquery.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <link rel="stylesheet" href="/insight.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+        <script>
+            $(function(){
+                var myChart = Highcharts.chart('chart1', {
+                    chart: {
+                        type: 'bar'
+                    },
+
+                    title: {
+                        text: 'Fruit Consumption'
+                    },
+
+                    xAxis: {
+                        categories: ['Apples, Bananas, Oranges']
+                    },
+
+                    yAxis: {
+                        title: {
+                            text: 'Fruit Eaten'
+                        }
+                    },
+
+                    series: [{
+                        name: 'Jane',
+                        data: [1, 0, 4]
+                    }, {
+                        name: 'John',
+                        data: [5, 7, 3]
+                    }]
+                });
+
+            });
+        </script>
+    </head>
+    <body>
+    <div id="topbar">
+        <div class = "indexdiv">
+        <a href="/"><span id="top">About Us</span></a>
+        <a href="/home"><span id="top">Home</span></a>
+        <a href="/filter"><span id="top">Pivot Table Builder</span></a>
+        </div>
+    </div>
+
+    <div id="description">
+        <h2>Examining the Relationships between home life, alcohol consumption
+            and education.</h2>
+    </div>
+
+    <div class="discussion">
+        <div class="text">Hi </div>
+        <div id="chart1" class="chart">
+
+        </div>
+
+
+
+    </body>
+    </html>
+    '''
+
+    return html
 
 if __name__ == "__main__":
     app.run(debug=True, host='127.0.0.1', port=80)
