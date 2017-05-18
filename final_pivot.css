@@ -94,6 +94,7 @@ h3 {
 #tablediv {
     width: 70%;
     float: left;
+    /*padding-right: 20%;*/
 }
 
 #keydiv {
@@ -105,9 +106,17 @@ h3 {
 
 #keydiv h3 {
   text-align: left;
-  color: green;
+  color: red;
 }
 
 p {
   font-family: 'Raleway', sans-serif;
+}
+table {
+
+  padding-right: 20%;
+}
+
+.key {
+  color: black;
 }

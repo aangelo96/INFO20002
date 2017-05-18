@@ -588,6 +588,38 @@ def main(pRow, pCol, pAg_val, pAg_operatn, fltr_sec, fltr_sign, fltr_val):
 	return data_2d
 
 
+#Function that generates the extra information in the pivot table page
+def keygen(irow,icol):
+
+    #Use a dictionary with the info in it for the program to choose from, depending
+    #On the user's input
+
+
+    """
+      NEED TO CHANGE WEEKDAY/WEEKEND ALCOLHOL CONSUMPTION BACK TO THE CORRECT ONE
+
+    """
+    extrainfo = {
+    'Age': ['Numeric from 15-22',],
+    'Sex': ['F - Female', 'M - Male',],
+    'Parent Cohabitation Status': ['T - Living Together', 'A - Living Apart'],
+    'Daily Alcohol Consumption': ['From 1-5', '1 - Very Low', '5- Very High'],
+    'Weekly Alcohol Consumption': ['From 1-5', '1 - Very Low', '5- Very High'],
+    }
+
+    keyhtml = '''<div id = "keydiv">
+        <h3>Columns: <span style="color:black">%s</span></h3>
+        ''' % icol
+
+    for i in extrainfo[icol]:
+        keyhtml += '<p>%s</p>' % i
+
+    keyhtml += '<h3>Rows: <span style="color:black">%s</span></h3>' % irow
+    for i in extrainfo[irow]:
+        keyhtml += '<p>%s</p>' % i      
+    keyhtml += '</div>'
+    return keyhtml
+
 
 
 @app.route('/handler', methods=['POST'])
@@ -603,6 +635,8 @@ def handler():
 
     #With this function we get an array that contains the processed data
     data_array = main(irow,icol,agg_val,agg_op,fil_sect,fil_sign,fil_val)
+    print('Row: %s') % irow 
+    print('Column : %s') % icol
     
     data = DictReader(open("EditedData3.csv"))
     data = list(data)
@@ -645,14 +679,15 @@ def handler():
             <h3>With respect to the <span id="details">%s</span> : <span id="details">%s</span></h3>
             <h3>When %s %s %s</span></h3>
         <hr>
+    
+    <div id="contentdiv">  
+    <div id="tablediv">        
+    <table id="myTable" align = "right"><tr><td></td>
     '''
-    html += '<div id="contentdiv">'  
-    html += '<div id="tablediv">'        
-    html += '<table id="myTable"><tr><td></td>'
-    #Add Column Tag
+    #Add Column categories in first
     for col in cols :
         html += '<td>'+col+'</row>'
-    #Add Total Tag
+    #Add Total column
     html += '<td>Total</td>'
     html += '</tr>'
     
@@ -675,7 +710,7 @@ def handler():
         else :
             row.append('-')
         
-    #use createbins
+    #use createbins to find bin ranges
     bins = createbins(minnum, maxnum)
     
     #counter for Row Tag
@@ -705,18 +740,17 @@ def handler():
             if (data_array[col][row]!='-') :
                 total += data_array[col][row]
         html += '<td><strong>%s</strong></td>' % str(total)
-    html +='</tr>'
 
+    #And then finish off the table
     html += '''
+    </tr>
     </table>
     </div>
-    <div id = "keydiv">
-        <h3>Columns:\n</h3>
-        <p>hellolol</p>
-        <h3>Rows:</h3>
-    </div>
-    </div>
     '''
+
+    #Add in the key on the right
+    html += keygen(irow, icol)
+    html += '</div>'
     html += '</body></html>'
     
     
