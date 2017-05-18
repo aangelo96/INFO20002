@@ -41,8 +41,8 @@ def route():
              <li> Parents Cohabitation Status </li>
              <li> Study Time </li>
              <li> Number of Failed Subject </li>
-             <li> Daily Alcohol Consumption </li>
-             <li> Weekly Alcohol Consumption </li>
+             <li> Weekday Alcohol Consumption </li>
+             <li> Weekend Alcohol Consumption </li>
              <li> Number of Absences </li>
              <li> Average Grade </li>
          </ol>
@@ -265,8 +265,8 @@ def filtering():
           <option value="Age"> Age </option>
           <option value="Sex"> Sex </option>
           <option value="Parent Cohabitation Status"> Parent Cohabitation Status </option>
-          <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
-          <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
+          <option value="Weekday Alcohol Consumption"> Weekday Alcohol Consumption </option>
+          <option value="Weekend Alcohol Consumption"> Weekend Alcohol Consumption </option>
           <option value="Quality of Family Relationships">Quality of Family Relationships</option>
           </select>
           <br>
@@ -294,8 +294,8 @@ def filtering():
           <option value="Age"> Age </option>
           <option value="Sex"> Sex </option>
           <option value="Parent Cohabitation Status"> Parent Cohabitation Status </option>
-          <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
-          <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
+          <option value="Weekday Alcohol Consumption"> Weekday Alcohol Consumption </option>
+          <option value="Weekend Alcohol Consumption"> Weekend Alcohol Consumption </option>
           <option value="Quality of Family Relationships">Quality of Family Relationships</option>
           </select>
           <br><br>
@@ -306,8 +306,8 @@ def filtering():
           <option value="Sex"> Sex </option>
           <option value="Age"> Age </option>
           <option value="Parent Cohabitation Status"> Parent Cohabitation Status </option>
-          <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
-          <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
+          <option value="Weekday Alcohol Consumption"> Weekday Alcohol Consumption </option>
+          <option value="Weekend Alcohol Consumption"> Weekend Alcohol Consumption </option>
           <option value="Quality of Family Relationships">Quality of Family Relationships</option>
           </select>
           <br><br>
@@ -327,8 +327,8 @@ def filtering():
           <option value="Average Grade"> Average Grade </option>
           <option value="Number of Failed Subjects"> Number of Failed Subjects </option>
           <option value="Study time"> Study Time </option>
-          <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
-          <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
+          <option value="Weekday Alcohol Consumption"> Weekday Alcohol Consumption </option>
+          <option value="Weekend Alcohol Consumption"> Weekend Alcohol Consumption </option>
           <option value="Quality of Family Relationships">Quality of Family Relationships</option>
           </select>
           <br><br>
@@ -638,8 +638,8 @@ def keygen(irow,icol):
     'Age': ['Numeric from 15-22',],
     'Sex': ['F - Female', 'M - Male',],
     'Parent Cohabitation Status': ['T - Living Together', 'A - Living Apart'],
-    'Daily Alcohol Consumption': ['From 1-5', '1 - Very Low', '5- Very High'],
-    'Weekly Alcohol Consumption': ['From 1-5', '1 - Very Low', '5- Very High'],
+    'Weekday Alcohol Consumption': ['From 1-5', '1 - Very Low', '5- Very High'],
+    'Weekend Alcohol Consumption': ['From 1-5', '1 - Very Low', '5- Very High'],
     'Quality of Family Relationships': ['From 1-5', '1 - Very Low', '5- Very High']
     }
 
@@ -808,7 +808,7 @@ def insights():
 
         <script>
             $(function(){
-                var myChart = Highcharts.chart('container', {
+                var myChart = Highcharts.chart('chart1', {
                     chart: {
                         type: 'bar'
                     },
@@ -853,9 +853,13 @@ def insights():
             and education.</h2>
     </div>
 
-    <div id="container">
+    <div class="discussion">
+        <div class="text">Hi </div>
+        <div id="chart1" class="chart">
 
-    </div>
+        </div>
+
+
 
     </body>
     </html>

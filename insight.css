@@ -29,7 +29,7 @@
 h2 {
     font-family: 'Raleway', sans-serif;
     color: black;
-    <link rel="stylesheet" href="/insight.css">
+
 }
 .indexdiv a{
     text-decoration: none;
@@ -42,4 +42,23 @@ html {
 #container {
     width: 80%;
     height: 80%;
+}
+
+.discussion {
+    width: 100%;
+    height: 50%;
+    display: inline-block;
+    padding-right: 10%;
+}
+
+.text {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.chart {
+    width: 50%;
+    height: 100%;
+    float:right;
 }

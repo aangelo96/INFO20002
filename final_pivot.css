@@ -23,7 +23,6 @@ td:last-child {
 /* HTML and BODY part*/
 html {
     background-color: #EFEFEF;
-    background-color: pink;
 }
 html,body {
   min-width: 450px;
