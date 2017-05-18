@@ -82,6 +82,37 @@ def route():
 '''
     return home_page
 
+@app.route('/home')
+def homeroute():
+    home_page = '''
+<!doctype html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="final_home2.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+</head>
+</body>
+    <div id="bodydiv">
+        <div id="titlediv">
+            <h3>Student Alcohol Consumption </h3>
+            <img src="https://stevenchasestudios.files.wordpress.com/2012/06/kopandawm.png" 
+            title = "Picture from Steven Chase Studios"/>
+        </div>
+        <div id="linkbar">
+            <div class="link"><a href="/">About Us</a></div>
+            <div class="link"><a href="/filter">Pivot Table Builder</a></div>
+            <div class="link"><a href="/insights">Insights</a></div>
+            <div class="link"><a href="/fulldata">Data</a></div>
+        </div>
+    </div>
+</body>
+</html>
+'''
+    return home_page
+
 @app.route('/fulldata')
 def fulldata():
     full_page = '''
@@ -668,7 +699,7 @@ def handler():
         <div id="topbar">
             <div class = "indexdiv"><a href="/"><span id="top">Home</span></a>
             <a href="/filter"><span id="top">Pivot Table Builder</span></a>
-            <a href="http://www.nyan.cat"><span id="top">Insights</span></a></div>
+            <a href="/insights"><span id="top">Insights</span></a></div>
         </div>
         <div id="header">
             <h1 id = "title">Pivot Table<img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/></h1> 
@@ -758,6 +789,25 @@ def handler():
     return html % (irow,icol,agg_op, agg_val,fil_sect,fil_sign,fil_val)
     
 
+
+@app.route('/insights')
+def insights():
+    html = '''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link rel="stylesheet" href="/insight.css"
+    </head>
+    <div id="topbar">
+        <div class = "indexdiv"><a href="/"><span id="top">Home</span></a>
+        <a href="/filter"><span id="top">Pivot Table Builder</span></a>
+    </div>
+
+    </body>
+    </html>
+    '''
+
+    return html
 
 if __name__ == "__main__":
     app.run(debug=True, host='127.0.0.1', port=80)
