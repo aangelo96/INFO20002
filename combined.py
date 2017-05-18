@@ -267,6 +267,7 @@ def filtering():
           <option value="Parent Cohabitation Status"> Parent Cohabitation Status </option>
           <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
           <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
+          <option value="Quality of Family Relationships">Quality of Family Relationships</option>
           </select>
           <br>
           <br>
@@ -295,6 +296,7 @@ def filtering():
           <option value="Parent Cohabitation Status"> Parent Cohabitation Status </option>
           <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
           <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
+          <option value="Quality of Family Relationships">Quality of Family Relationships</option>
           </select>
           <br><br>
       </div>  
@@ -306,6 +308,7 @@ def filtering():
           <option value="Parent Cohabitation Status"> Parent Cohabitation Status </option>
           <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
           <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
+          <option value="Quality of Family Relationships">Quality of Family Relationships</option>
           </select>
           <br><br>
       </div> 
@@ -326,6 +329,7 @@ def filtering():
           <option value="Study time"> Study Time </option>
           <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
           <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
+          <option value="Quality of Family Relationships">Quality of Family Relationships</option>
           </select>
           <br><br>
       </div>
@@ -636,6 +640,7 @@ def keygen(irow,icol):
     'Parent Cohabitation Status': ['T - Living Together', 'A - Living Apart'],
     'Daily Alcohol Consumption': ['From 1-5', '1 - Very Low', '5- Very High'],
     'Weekly Alcohol Consumption': ['From 1-5', '1 - Very Low', '5- Very High'],
+    'Quality of Family Relationships': ['From 1-5', '1 - Very Low', '5- Very High']
     }
 
     keyhtml = '''<div id = "keydiv">
@@ -796,11 +801,60 @@ def insights():
     <!DOCTYPE html>
     <html>
     <head>
-        <link rel="stylesheet" href="/insight.css"
+        <script src="/jquery.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <link rel="stylesheet" href="/insight.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+        <script>
+            $(function(){
+                var myChart = Highcharts.chart('container', {
+                    chart: {
+                        type: 'bar'
+                    },
+
+                    title: {
+                        text: 'Fruit Consumption'
+                    },
+
+                    xAxis: {
+                        categories: ['Apples, Bananas, Oranges']
+                    },
+
+                    yAxis: {
+                        title: {
+                            text: 'Fruit Eaten'
+                        }
+                    },
+
+                    series: [{
+                        name: 'Jane',
+                        data: [1, 0, 4]
+                    }, {
+                        name: 'John',
+                        data: [5, 7, 3]
+                    }]
+                });
+
+            });
+        </script>
     </head>
+    <body>
     <div id="topbar">
-        <div class = "indexdiv"><a href="/"><span id="top">Home</span></a>
+        <div class = "indexdiv">
+        <a href="/"><span id="top">About Us</span></a>
+        <a href="/home"><span id="top">Home</span></a>
         <a href="/filter"><span id="top">Pivot Table Builder</span></a>
+        </div>
+    </div>
+
+    <div id="description">
+        <h2>Examining the Relationships between home life, alcohol consumption
+            and education.</h2>
+    </div>
+
+    <div id="container">
+
     </div>
 
     </body>
