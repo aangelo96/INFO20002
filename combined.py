@@ -679,14 +679,15 @@ def handler():
             <h3>With respect to the <span id="details">%s</span> : <span id="details">%s</span></h3>
             <h3>When %s %s %s</span></h3>
         <hr>
+    
+    <div id="contentdiv">  
+    <div id="tablediv">        
+    <table id="myTable" align = "right"><tr><td></td>
     '''
-    html += '<div id="contentdiv">'  
-    html += '<div id="tablediv">'        
-    html += '<table id="myTable" align = "right"><tr><td></td>'
-    #Add Column Tag
+    #Add Column categories in first
     for col in cols :
         html += '<td>'+col+'</row>'
-    #Add Total Tag
+    #Add Total column
     html += '<td>Total</td>'
     html += '</tr>'
     
@@ -709,7 +710,7 @@ def handler():
         else :
             row.append('-')
         
-    #use createbins
+    #use createbins to find bin ranges
     bins = createbins(minnum, maxnum)
     
     #counter for Row Tag
@@ -739,16 +740,16 @@ def handler():
             if (data_array[col][row]!='-') :
                 total += data_array[col][row]
         html += '<td><strong>%s</strong></td>' % str(total)
-    html +='</tr>'
 
-
+    #And then finish off the table
     html += '''
+    </tr>
     </table>
     </div>
     '''
 
+    #Add in the key on the right
     html += keygen(irow, icol)
-
     html += '</div>'
     html += '</body></html>'
     
