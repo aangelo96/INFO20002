@@ -854,7 +854,7 @@ def insights():
     </div>
 
     <div class="discussion">
-        <div class="text">Hi </div>
+        <div class="text"><h2> ASLDKJASLDJASKLDJASDKLAJSDKL</h2></div>
         <div id="chart1" class="chart">
 
         </div>
