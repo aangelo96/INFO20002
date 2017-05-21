@@ -120,6 +120,7 @@ def fulldata():
 <html>
 <head>
     <title>Pivot Table - Filters</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -129,6 +130,13 @@ def fulldata():
     
 </head>
 <body>
+    <div id="topbar">
+        <div class = "indexdiv">
+        <a href="/"><span id="top">About Us</span></a>
+        <a href="/home"><span id="top">Home</span></a>
+        <a href="/filter"><span id="top">Pivot Table Builder</span></a>
+        <a href="/insights"><span id="top">Insights</span></a></div>
+    </div>
 <h1 align="center"> Full Student Alcohol Consumption Data Set <img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/></h1>
 <br>
 <hr>
@@ -236,6 +244,16 @@ def filtering():
     
 </head>
 <body>
+
+<div id="topbar">
+
+    <div class = "indexdiv">
+    <a href="/"><span id="top">About Us</span></a>
+    <a href="/home"><span id="top">Home</span></a>
+    <a href="/insights"><span id="top">Insights</span></a>
+    <a href="/fulldata"><span id="top">Data</span></a>
+    </div>
+</div>
 <h1 align="center"> Alcoholic Pivot Table Builder <img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/></h1>
 <br>
 <hr>
@@ -393,7 +411,6 @@ def convert_rows_2_cols(data_2d, header):
 		for elem in row:
 			col_dict[header[i]].append(elem)
 			i += 1
-
 	return col_dict
         
 def get_col_types(col_dict, header):
@@ -573,7 +590,6 @@ def apply_operation(operation, lst_vals):
 		ans = min(lst_vals)
 	elif(operation == "Maximum Of"):
 		ans = max(lst_vals)
-	
 	return ans
 	
 def get_average_of(lst_vals):
@@ -581,6 +597,7 @@ def get_average_of(lst_vals):
 	returns the average of the values inside lst_vals
 	"""
 	return round(float(sum(lst_vals))/len(lst_vals),2)
+
 
 #MAIN
 def main(pRow, pCol, pAg_val, pAg_operatn, fltr_sec, fltr_sign, fltr_val):
@@ -605,6 +622,7 @@ def main(pRow, pCol, pAg_val, pAg_operatn, fltr_sec, fltr_sign, fltr_val):
 
 	#list of type of data values for each column
 	coltype_dict = defaultdict(str)
+
 	coltype_dict = get_col_types(csv_cols, header)
 
 	#get columns needed
@@ -671,8 +689,8 @@ def handler():
 
     #With this function we get an array that contains the processed data
     data_array = main(irow,icol,agg_val,agg_op,fil_sect,fil_sign,fil_val)
-    print('Row: %s') % irow 
-    print('Column : %s') % icol
+    # print('Row: %s') % irow 
+    # print('Column : %s') % icol
     
     data = DictReader(open("EditedData3.csv"))
     data = list(data)
@@ -702,9 +720,14 @@ def handler():
     </head>
     <body>
         <div id="topbar">
-            <div class = "indexdiv"><a href="/"><span id="top">Home</span></a>
+
+            <div class = "indexdiv">
+            <a href="/"><span id="top">About Us</span></a>
+            <a href="/home"><span id="top">Home</span></a>
             <a href="/filter"><span id="top">Pivot Table Builder</span></a>
-            <a href="/insights"><span id="top">Insights</span></a></div>
+            <a href="/insights"><span id="top">Insights</span></a>
+            <a href="/fulldata"><span id="top">Data</span></a>
+            </div>
         </div>
         <div id="header">
             <h1 id = "title">Pivot Table<img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/></h1> 
@@ -790,7 +813,7 @@ def handler():
     html += '</body></html>'
     
     
-    print(data_array)
+    # print(data_array)
     return html % (irow,icol,agg_op, agg_val,fil_sect,fil_sign,fil_val)
     
 
@@ -845,6 +868,7 @@ def insights():
         <a href="/"><span id="top">About Us</span></a>
         <a href="/home"><span id="top">Home</span></a>
         <a href="/filter"><span id="top">Pivot Table Builder</span></a>
+        <a href="/fulldata"><span id="top">Data</span></a>
         </div>
     </div>
 
