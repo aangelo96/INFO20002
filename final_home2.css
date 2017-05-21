@@ -5,7 +5,7 @@
     margin: 2% 5%;
     padding-top: 5%;
     border-radius: 10px;
-    box-shadow: 1px 1px 1px;
+    box-shadow: 2px 2px 1px;
     text-align: center;
 }
 
@@ -22,14 +22,15 @@
 
 .link {
     display:inline-block;
-    background-color: #005FCC;
+    /*background-color: #005FCC;*/
+    background-color: orange;
     border-radius: 5px;
     padding: 5px;
     margin: 10px;
     /*position: relative;*/
     margin-bottom: 5%;
     text-align: center;
-    box-shadow: 1px 1px 1px;
+    box-shadow: 0.5px 0.5px 1px;
 
 }
 
