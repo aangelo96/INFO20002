@@ -10,7 +10,7 @@ from collections import defaultdict
 
 app = Flask(__name__, static_folder='.', static_url_path='')
 
-@app.route('/')
+@app.route('/about')
 def route():
     home_page = '''
 <!doctype html>
@@ -82,7 +82,7 @@ def route():
 '''
     return home_page
 
-@app.route('/home')
+@app.route('/')
 def homeroute():
     home_page = '''
 <!doctype html>
@@ -102,7 +102,7 @@ def homeroute():
             title = "Picture from Steven Chase Studios"/>
         </div>
         <div id="linkbar">
-            <div class="link"><a href="/">About Us</a></div>
+            <div class="link"><a href="/about">About Us</a></div>
             <div class="link"><a href="/filter">Pivot Table Builder</a></div>
             <div class="link"><a href="/insights">Insights</a></div>
             <div class="link"><a href="/fulldata">Data</a></div>
@@ -119,6 +119,7 @@ def fulldata():
 <!doctype html>
 <html>
 <head>
+    <link rel="icon" href="http://example.com/favicon.png">
     <title>Pivot Table - Filters</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -132,8 +133,8 @@ def fulldata():
 <body>
     <div id="topbar">
         <div class = "indexdiv">
-        <a href="/"><span id="top">About Us</span></a>
-        <a href="/home"><span id="top">Home</span></a>
+        <a href="/about"><span id="top">About Us</span></a>
+        <a href="/"><span id="top">Home</span></a>
         <a href="/filter"><span id="top">Pivot Table Builder</span></a>
         <a href="/insights"><span id="top">Insights</span></a></div>
     </div>
@@ -248,8 +249,8 @@ def filtering():
 <div id="topbar">
 
     <div class = "indexdiv">
-    <a href="/"><span id="top">About Us</span></a>
-    <a href="/home"><span id="top">Home</span></a>
+    <a href="/about"><span id="top">About Us</span></a>
+    <a href="/"><span id="top">Home</span></a>
     <a href="/insights"><span id="top">Insights</span></a>
     <a href="/fulldata"><span id="top">Data</span></a>
     </div>
@@ -715,6 +716,7 @@ def handler():
     html = '''
     <html>
     <head>
+        <title>Pivot Table Builder</title>
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
         <link rel="stylesheet" href="final_pivot.css">
     </head>
@@ -722,8 +724,8 @@ def handler():
         <div id="topbar">
 
             <div class = "indexdiv">
-            <a href="/"><span id="top">About Us</span></a>
-            <a href="/home"><span id="top">Home</span></a>
+            <a href="/about"><span id="top">About Us</span></a>
+            <a href="/"><span id="top">Home</span></a>
             <a href="/filter"><span id="top">Pivot Table Builder</span></a>
             <a href="/insights"><span id="top">Insights</span></a>
             <a href="/fulldata"><span id="top">Data</span></a>
@@ -824,6 +826,7 @@ def insights():
     <!DOCTYPE html>
     <html>
     <head>
+        <title>Insights</title>
         <script src="/jquery.js"></script>
         <script src="http://code.highcharts.com/highcharts.js"></script>
         <link rel="stylesheet" href="/insight.css">
@@ -865,8 +868,8 @@ def insights():
     <body>
     <div id="topbar">
         <div class = "indexdiv">
-        <a href="/"><span id="top">About Us</span></a>
-        <a href="/home"><span id="top">Home</span></a>
+        <a href="/about"><span id="top">About Us</span></a>
+        <a href="/"><span id="top">Home</span></a>
         <a href="/filter"><span id="top">Pivot Table Builder</span></a>
         <a href="/fulldata"><span id="top">Data</span></a>
         </div>
