@@ -606,6 +606,8 @@ def main(pRow, pCol, pAg_val, pAg_operatn, fltr_sec, fltr_sign, fltr_val):
 	user-selected attributes from the columns of data are organized and 
 	aggregated into a 2d data
 	"""
+
+	print pRow, pCol, pAg_val, pAg_operatn, fltr_sec, fltr_sign, fltr_val
 	
 	fltr_lst = [fltr_sec, fltr_sign, fltr_val]
     #opening csv file
@@ -648,11 +650,6 @@ def keygen(irow,icol):
     #Use a dictionary with the info in it for the program to choose from, depending
     #On the user's input
 
-
-    """
-      NEED TO CHANGE WEEKDAY/WEEKEND ALCOLHOL CONSUMPTION BACK TO THE CORRECT ONE
-
-    """
     extrainfo = {
     'Age': ['Numeric from 15-22',],
     'Sex': ['F - Female', 'M - Male',],
@@ -690,9 +687,7 @@ def handler():
 
     #With this function we get an array that contains the processed data
     data_array = main(irow,icol,agg_val,agg_op,fil_sect,fil_sign,fil_val)
-    # print('Row: %s') % irow 
-    # print('Column : %s') % icol
-    
+    print data_array
     data = DictReader(open("EditedData3.csv"))
     data = list(data)
 
@@ -808,7 +803,6 @@ def handler():
     </table>
     </div>
     '''
-
     #Add in the key on the right
     html += keygen(irow, icol)
     html += '</div>'
@@ -817,11 +811,75 @@ def handler():
     
     # print(data_array)
     return html % (irow,icol,agg_op, agg_val,fil_sect,fil_sign,fil_val)
-    
 
+#Function that takes the desired categories, and returns a dictionary of values
+#to put into the chart    
+def insightgen(category, xaxis, yaxis):
+    read_csv = csv.reader(open("EditedData3.csv"))
+    data = list(read_csv)
+    
+    #First go through the first row and identify
+    #the indexes of the chosen categories
+    for i in data[0]:
+        if i == category:
+            catindex = data[0].index(i)
+        elif i == xaxis:
+            xindex = data[0].index(i)
+        elif i == yaxis:
+            yindex = data[0].index(i)
+
+    #Create a dictionary for each category, each with their own
+    #lists of data
+    cat_dict = {}
+    for row in data[1:]:
+        if row[catindex] not in cat_dict:
+            cat_dict[row[catindex]] = {}
+
+    #Then go through each row in the data and the yaxis value
+    #to the unique xaxis values
+    xaxis_dict = {}
+    for row in data[1:]:
+        if row[xindex] not in cat_dict[row[catindex]]:
+        	cat_dict[row[catindex]][row[xindex]] = [int(row[yindex])]
+        else:
+        	cat_dict[row[catindex]][row[xindex]].append(int(row[yindex]))
+
+    #After all the data has been written in, replace the list of yaxis values with their 
+    #averages (for purpose of the chart)
+    for category in cat_dict.keys():
+        for xval in cat_dict[category].keys():
+            #cat_dict[category][xval] = get_average_of(cat_dict[category][xval])
+            cat_dict[category][xval] = get_average_of(cat_dict[category][xval])
+
+
+
+    return cat_dict
+
+#Takes as input the key-value pairs to be put into the chart,
+#and returns a sorted list for use in the chart.
+def sorted_list(pairs):
+    pairs.sort()
+
+    final_list = []
+    for i in pairs:
+        final_list.append(i[1])
+    return final_list
+
+@app.route('/test')
+def test():
+
+
+    html = str(insightgen("Sex", "Weekend Alcohol Consumption", "Average Grade"))
+
+    return html
 
 @app.route('/insights')
 def insights():
+
+
+
+    data_dict = insightgen("Sex", "Weekend Alcohol Consumption", "Average Grade")
+
     html = '''
     <!DOCTYPE html>
     <html>
@@ -831,39 +889,119 @@ def insights():
         <script src="http://code.highcharts.com/highcharts.js"></script>
         <link rel="stylesheet" href="/insight.css">
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        '''
 
+        #Create chart one and two, for the effects of weekend/weekday alcohol consumption on grades
+    data_dict1 = insightgen("Sex", "Weekend Alcohol Consumption", "Average Grade")
+    data_dict2 = insightgen("Sex", "Weekday Alcohol Consumption", "Average Grade")
+    html += '''
         <script>
             $(function(){
                 var myChart = Highcharts.chart('chart1', {
                     chart: {
-                        type: 'bar'
+                        type: 'line'
                     },
 
                     title: {
-                        text: 'Fruit Consumption'
+                        text: 'Weekend'
                     },
 
                     xAxis: {
-                        categories: ['Apples, Bananas, Oranges']
+                        text: 'Level of Weekend Alcohol Consumption',
+                        categories: [1,2,3,4,5]
                     },
 
                     yAxis: {
                         title: {
-                            text: 'Fruit Eaten'
+                            text: 'Average Grade'
                         }
                     },
 
                     series: [{
-                        name: 'Jane',
-                        data: [1, 0, 4]
+                        name: 'Females',
+                        data: %s
                     }, {
-                        name: 'John',
-                        data: [5, 7, 3]
+                        name: 'Males',
+                        data: %s
+                    }]
+                });
+
+            }); ''' % (str(sorted_list(data_dict1['F'].items())), str(sorted_list(data_dict1['M'].items())))
+
+
+    html += '''
+            $(function(){
+                var myChart = Highcharts.chart('chart2', {
+                    chart: {
+                        type: 'line'
+                    },
+
+                    title: {
+                        text: 'Weekday'
+                    },
+
+                    xAxis: {
+                        text: 'Level of Weekday Alcohol Consumption',
+                        categories: [1,2,3,4,5]
+                    },
+
+                    yAxis: {
+                        title: {
+                            text: 'Average Grade'
+                        }
+                    },
+
+                    series: [{
+                        name: 'Females',
+                        data: %s
+                    }, {
+                        name: 'Males',
+                        data: %s
                     }]
                 });
 
             });
-        </script>
+
+    ''' % (str(sorted_list(data_dict2['F'].items())), str(sorted_list(data_dict2['M'].items())))
+    #Create chart three, to show the effect of weekend alcohol consumption on no. of failed subjects
+    data_dict1 = insightgen("Sex", "Weekend Alcohol Consumption", "Number of Failed Subjects")
+    html += '''
+            $(function(){
+                var myChart = Highcharts.chart('chart3', {
+                    chart: {
+                        type: 'line'
+                    },
+
+                    title: {
+                        text: 'Weekend'
+                    },
+
+                    xAxis: {
+                        text: 'Level of Weekend Alcohol Consumption',
+                        categories: [1,2,3,4,5]
+                    },
+
+                    yAxis: {
+                        title: {
+                            text: 'Failed Subjects'
+                        }
+                    },
+
+                    series: [{
+                        name: 'Females',
+                        data: %s
+                    }, {
+                        name: 'Males',
+                        data: %s
+                    }]
+                });
+
+            });
+    ''' % (str(sorted_list(data_dict1['F'].items())), str(sorted_list(data_dict1['M'].items())))
+
+    html += '''
+        
+    </script>
     </head>
     <body>
     <div id="topbar">
@@ -881,13 +1019,32 @@ def insights():
     </div>
 
     <div class="discussion">
-        <div class="text"><h2> ASLDKJASLDJASKLDJASDKLAJSDKL</h2></div>
-        <div id="chart1" class="chart">
+        <div class="text">
+            <h2><strong>The Effect of Weekday/Weekend Alcohol Consumption on Average Grade</strong></h2>
+            <p>Interestingly, there doesn't appear to be a clear negative association between level of 
+            alcohol consumption and average grade. 
+            </br></br>
+            The only hint of declining grades is evident in Males who drink more on the Weekends.
 
+            </br></br>
+            According to the data, we can all go out and drink as much as we want and still maintain our grades.
+
+            </p>
         </div>
+        <div id="chart1" class="chart"></div>
+        <div id="chart2" class="chart"></div>
+    </div>
 
-
-
+    <div class="discussion">
+        <div class="text">
+            <h2>Weekend Alcohol Consumption and Number of Failed Subjects</h2>
+            <p>
+            This shows us something more intuitive, that the greater people of both sexes consume alcohol 
+            on the weekends, the more subjects they fail.
+            </p>
+        </div>
+        <div id="chart3" class="chart"></div>
+    </div>
     </body>
     </html>
     '''
