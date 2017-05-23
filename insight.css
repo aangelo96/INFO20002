@@ -55,12 +55,14 @@ html {
 }
 
 .text {
+	box-sizing: border-box;
     width: 50%;
     height: 100%;
-    float: left;
+    float: left; 
+    padding: 5px;
 }
 
-#chart1, #chart2 {
+#chart1, #chart2, #chart6, #chart7 {
     width: 25%;
     height: 400px;
     float:right;
