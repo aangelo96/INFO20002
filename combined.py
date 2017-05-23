@@ -1284,9 +1284,9 @@ def insights():
         
     <div class="row" id="age_sex_consumption">
         <div class="col-md-12 col-xs-12 col-lg-12 col-xs-12">
-        <h3> Intro : Trends in Alcohol consumption</h3>
-        <ul> 
-        <li> This shows us as they get older on average female students consume less alcohol, while male students consume more.</li>
+        <h2><strong> Intro : Trends in Alcohol consumption</strong></h2>
+        <ul>
+        <p> This shows us as they get older on average female students consume less alcohol, while male students consume more.</p>
         </ul>
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
@@ -1295,16 +1295,16 @@ def insights():
         <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
         <div id="chart10" class="chart" style="width:100%;"></div>
         </div>       
-    </div>
+    </div><br>
     
     <div class="row" id="alcohol_average_sex">
         <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
-        <h3> The Effect of Weekday and Weekend Alcohol Consumption on Student's Average Grade</h3>
+        <h2><strong> The Effect of Weekday and Weekend Alcohol Consumption on Student's Average Grade</strong></h2>
         <ul> 
-        <li> Interestingly, there doesn't appear to be a clear negative association between level of 
-            alcohol consumption and average grade. </li>
-        <li>The only hint of declining grades is evident in Males who drink more on the Weekends. </li>
-        <li>According to the data, we can all go out and drink as much as we want and still maintain our grades. </li>
+        <p> Interestingly, there doesn't appear to be a clear negative association between level of 
+            alcohol consumption and average grade. </p>
+        <p>The only hint of declining grades is evident in Males who drink more on the Weekends. </p>
+        <p>According to the data, we can all go out and drink as much as we want and still maintain our grades. </p>
         </ul>
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
@@ -1313,62 +1313,63 @@ def insights():
         <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
         <div id="chart2" class="chart" style="width:100%;"></div>
         </div>
-    </div>
+    </div><br>
     
     <div class="row" id="weekendalc_fail_sex">
         <div class="col-md-6 col-xs-12 col-lg-6 col-xs-12">
-        <h3> The Effect of Weekend Alcohol Consumption on Student's Number of Failed Subjects</h3>
-        <ul> 
-        <li> This shows us something more intuitive, that the greater people of both sexes consume alcohol 
-            on the weekends, the more subjects they fail.</li>
-        </ul>
+        <h2><strong> The Effect of Weekend Alcohol Consumption on Student's Number of Failed Subjects</strong></h2> 
+        <ul>
+        <p> This shows us something more intuitive, that the greater people of both sexes consume alcohol 
+            on the weekends, the more subjects they fail.</p>
+        </>
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
         <div id="chart3" class="chart" style="width:100%;"></div>
         </div>       
-    </div>
+    </div><br>
     
     <div class="row" id="family_weekendalc_sex">
         <div class="col-md-6 col-xs-12 col-lg-6 col-xs-12">
-        <h3> The Effect of Family Relationship Quality on Student's Weekend Alcohol Consumption</h3>
-        <ul> 
-        <li> The graph tells us that as the quality of family relationships decreases for males,
-            the level of their alcohol consumption will most likely increase.</li>
-        <li> On the other hand, this decreasing trend is not evident for females. </li>
-        <li> Therefore, it can be concluded that a females' alcohol consumption is not affected by their
-            relationship with their family. </li>
+        <h2><strong> The Effect of Family Relationship Quality on Student's Weekend Alcohol Consumption</strong></h2>
+        <ul>
+        <p> The graph tells us that as the quality of family relationships decreases for males,
+            the level of their alcohol consumption will most likely increase.</p>
+        <p> On the other hand, this decreasing trend is not evident for females. </p>
+        <p> Therefore, it can be concluded that a females' alcohol consumption is not affected by their
+            relationship with their family. </p>
         </ul>
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
         <div id="chart4" class="chart" style="width:100%;"></div>
         </div>       
-    </div>
+    </div><br>
     
     <div class="row" id="cohabitation_average_sex">
         <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
-        <h3> The Effect of Parent's Cohabitation Status on Student's Average Grade</h3>
-        <ul> 
-        <li> This demonstrates similar average grades in males, regardless
-            of their parents' cohabitation status.</li>
-        <li> Therefore, male youths' grades will not be affected by their 
-            parent's cohabitation status. </li>
-        <li> However, it is observed that females will have a higher average grade
-			when their parents are apart than when they're together. </li>
+        <h2><strong> The Effect of Parent's Cohabitation Status on Student's Average Grade</strong></h2>
+        <ul>
+        <p> This demonstrates similar average grades in males, regardless
+            of their parents' cohabitation status.</p>
+        <p> Therefore, male youths' grades will not be affected by their 
+            parent's cohabitation status. </p>
+        <p> However, it is observed that females will have a higher average grade
+			when their parents are apart than when they're together. </p>
         </ul>
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
         <div id="chart5" class="chart" style="width:100%;"></div>
         </div>
-    </div>
+    </div><br>
     
     <div class="row" id="alcohol_study_sex">
         <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
-        <h3> The Effect of Weekday and Weekend Alcohol Consumption on Student's Study Time</h3>
-        <ul> 
-        <li> From the graph we can see that alcohol consumptions during the weekend affect both gender (Female and Male), as they consume more
-        alcohol during the weekend, their study time decrease. </li>
-        <li> Even so, it seems that alcohol consumptions during the weekdays affect the female group more clearly and significant from
-        the data of our graph. </li>
+        <h2><strong> The Effect of Weekday and Weekend Alcohol Consumption on Student's Study Time</strong></h2>
+        <ul>
+        <p> 
+        From the graph we can see that alcohol consumptions during the weekend affect both gender (Female and Male), as they consume more
+        alcohol during the weekend, their study time decrease. </p>
+        <p> Even so, it seems that alcohol consumptions during the weekdays affect the female group more clearly and significant from
+        the data of our graph. </p>
         </ul>
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
