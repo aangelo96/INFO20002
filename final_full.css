@@ -1,26 +1,15 @@
+a:hover {
+    text-decoration: none;
+}
+
+
 h1 {
     font-family: 'Raleway', sans-serif;
     color : black;
 }
 
-#left,#right {
-    text-align:center;}
-
-.left_button {
-    background-color:orange;
-}
-
-.right_button {
-    background-color:blue;
-
-}
-
-.left_button:hover, .right_button:hover {
-    opacity:1;
-}
-
 body {
-    background-color: #CED8FF;
+    background-color: #EFEFEF;
     opacity:0.9;
     background-repeat: no-repeat;
     background-size: cover;
@@ -32,9 +21,13 @@ body {
     opacity:0.5;
 }
 
+tr {
+    font-family: 'Raleway', sans-serif;
+}
+
 button {
     background-color:black;
-    font-family:serif;
+    font-family: 'Raleway', sans-serif;
     font:bookman;
     font-weight:400;
     color:white;
@@ -64,10 +57,48 @@ th {
   background-color: orange;
 }
 
+#topbar {
+    height:10vh;
+    width: 100%;
+}
+
+#top {
+  /*background-color: orange;
+  color : #EFEFEF;*/
+  /*border-radius: 8px;
+  border-width: 20px;
+  border-color: blue;*/
+  padding : 14px;
+  font-weight: bold;
+  width: 30px;
+  height: 13px;
+  color: white;
+  border-radius: 8px;
+  /*box-shadow: 10px 0px 14px -7px #276873;
+  text-shadow: 1px 0px 0px #3d768a;*/
+  background-color: orange;
+}
+
+#top:hover {
+  opacity:0.8;
+  background-color: #2E86C1;
+}
+
 #beer {
     width: 50px;
     height: 50px;
     padding-left: 10px;
     /*padding-top: 10px;*/
     position: relative;
+}
+
+.indexdiv {
+    top:20px;
+    white-space: nowrap;
+    position: relative;
+    font-family: 'Raleway', sans-serif;
+    margin: auto;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
 }

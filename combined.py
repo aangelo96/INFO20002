@@ -10,22 +10,31 @@ from collections import defaultdict
 
 app = Flask(__name__, static_folder='.', static_url_path='')
 
-@app.route('/')
+#About Us Page
+@app.route('/about')
 def route():
     home_page = '''
 <!doctype html>
 <html>
 <head>
-    <title>Pivot Table - Filters</title>
+    <title>About Us</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="final_home.css">
     
 </head>
 <body>
-<h1 align="center"> Alcoholic Data Set and Pivot Table Builder <img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/> </h1>
-<br>
-<hr>
+<div id="topbar">
+    <div class="indexdiv">
+        <a href="/"><span id="top">Home</span></a>
+        <a href="/fulldata"><span id="top">Data</span></a>
+        <a href="/filter"><span id="top">Pivot Table Builder</span></a>
+        <a href="/insights"><span id="top">Insights</span></a>
+        <a href="/about"><span id="top">About Us</span></a>
+        <img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/>
+    </div>
+</div>
+<h1 align="center"> Alcoholic Data Set and Pivot Table Builder</h1>
 <br>
 <p id="aop"> About Our Project : </p>
 <ul id="about">
@@ -41,33 +50,13 @@ def route():
              <li> Parents Cohabitation Status </li>
              <li> Study Time </li>
              <li> Number of Failed Subject </li>
-             <li> Daily Alcohol Consumption </li>
-             <li> Weekly Alcohol Consumption </li>
+             <li> Weekday Alcohol Consumption </li>
+             <li> Weekend Alcohol Consumption </li>
              <li> Number of Absences </li>
              <li> Average Grade </li>
          </ol>
 </ul>
-
 <div class="container">
-    <p> Choose Your Option : </p>
-    <br>
-    <div class="row">
-        <form action="fulldata">
-        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" id="left">
-            <button type="submit" class="left_button"><b> Full Data Set </b></button>
-        </div>
-        </form>
-        <br>
-        <br>
-        <br>
-        <form action="filter">
-        <div class="col-md-12 col-lg-12 col-sm-12 col xs-12" id="right">
-            <button type="submit" class="right_button"><b> Pivot Table Generator </b></button>
-        </div>
-        </form>
-    </div>
-    <br>
-    <hr>
     <h2 align=center> Our Team Member </h2>
     <br>
     <p> Arnold Angelo - 783859 </p>
@@ -76,19 +65,54 @@ def route():
     <br>
     <p> Jorjilou Reyes - 836917 </p>
     <br>
-    <hr>
 </body>
 </html>
 '''
     return home_page
 
+#Home Page
+@app.route('/')
+def homeroute():
+    home_page = '''
+<!doctype html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="final_home2.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+</head>
+</body>
+    <div id="bodydiv">
+        <div id="titlediv">
+            <h3>Student Alcohol Consumption </h3>
+            <img src="https://stevenchasestudios.files.wordpress.com/2012/06/kopandawm.png" 
+            title = "Picture from Steven Chase Studios"/>
+        </div>
+        <div id="linkbar">
+            <div class="link"><a href="/fulldata">Data</a></div>
+            <div class="link"><a href="/filter">Pivot Table Builder</a></div>
+            <div class="link"><a href="/insights">Insights</a></div>
+            <div class="link"><a href="/about">About Us</a></div>
+            
+        </div>
+    </div>
+</body>
+</html>
+'''
+    return home_page
+
+#Data Page
 @app.route('/fulldata')
 def fulldata():
     full_page = '''
 <!doctype html>
 <html>
 <head>
-    <title>Pivot Table - Filters</title>
+    <link rel="icon" href="http://example.com/favicon.png">
+    <title>Full Data</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -98,9 +122,18 @@ def fulldata():
     
 </head>
 <body>
-<h1 align="center"> Full Student Alcohol Consumption Data Set <img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/></h1>
-<br>
-<hr>
+<div id="topbar">
+    <div class="indexdiv">
+        <a href="/"><span id="top">Home</span></a>
+        <a href="/fulldata"><span id="top">Data</span></a>
+        <a href="/filter"><span id="top">Pivot Table Builder</span></a>
+        <a href="/insights"><span id="top">Insights</span></a>
+        <a href="/about"><span id="top">About Us</span></a>
+        <img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/>
+    </div>
+</div>
+</div>
+<h1 align="center"> Full Student Alcohol Consumption Data Set</h1>
 <br>
 <p align=center> <span style="color:red;">*red</span> = Underage Alcoholics !!! </p>
 <br>
@@ -116,26 +149,11 @@ def fulldata():
 </div>
 </div>
 <br>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" id="left">
-            <form action="/">        
-                <button type="submit" class="left_button"><b> Go Back To Main Page </b></button>
-            </form>
-            </div>
-        <br>
-        <br>
-        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" id="right">
-            <form action="filter">
-                <button type="submit" class="right_button"><b> Go To Pivot Table Generator </b></button>
-            </form>
-        </div>
-        <br><br>
-    </div>
-</div><script src="bubblesorteds2.js"></script>
+<script src="bubblesorteds2.js"></script>
 </body>
 </html>
-'''
+''' 
+    #Opening CSV and put the data into table
     with open("EditedData3.csv", "rb") as csvfile :
         """Counter for Row"""
         counter = 0 
@@ -196,16 +214,24 @@ def filtering():
 <!doctype html>
 <html>
 <head>
-    <title>Pivot Table - Filters</title>
+    <title>Pivot Builder</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="final_filter.css">
    
-    
-    
 </head>
 <body>
-<h1 align="center"> Alcoholic Pivot Table Builder <img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/></h1>
+<div id="topbar">
+    <div class="indexdiv">
+        <a href="/"><span id="top">Home</span></a>
+        <a href="/fulldata"><span id="top">Data</span></a>
+        <a href="/filter"><span id="top">Pivot Table Builder</span></a>
+        <a href="/insights"><span id="top">Insights</span></a>
+        <a href="/about"><span id="top">About Us</span></a>
+        <img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/>
+    </div>
+</div>
+<h1 align="center"> Alcoholic Pivot Table Builder</h1>
 <br>
 <hr>
 <br>
@@ -234,8 +260,9 @@ def filtering():
           <option value="Age"> Age </option>
           <option value="Sex"> Sex </option>
           <option value="Parent Cohabitation Status"> Parent Cohabitation Status </option>
-          <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
-          <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
+          <option value="Weekday Alcohol Consumption"> Weekday Alcohol Consumption </option>
+          <option value="Weekend Alcohol Consumption"> Weekend Alcohol Consumption </option>
+          <option value="Quality of Family Relationships">Quality of Family Relationships</option>
           </select>
           <br>
           <br>
@@ -262,8 +289,9 @@ def filtering():
           <option value="Age"> Age </option>
           <option value="Sex"> Sex </option>
           <option value="Parent Cohabitation Status"> Parent Cohabitation Status </option>
-          <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
-          <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
+          <option value="Weekday Alcohol Consumption"> Weekday Alcohol Consumption </option>
+          <option value="Weekend Alcohol Consumption"> Weekend Alcohol Consumption </option>
+          <option value="Quality of Family Relationships">Quality of Family Relationships</option>
           </select>
           <br><br>
       </div>  
@@ -273,8 +301,9 @@ def filtering():
           <option value="Sex"> Sex </option>
           <option value="Age"> Age </option>
           <option value="Parent Cohabitation Status"> Parent Cohabitation Status </option>
-          <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
-          <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
+          <option value="Weekday Alcohol Consumption"> Weekday Alcohol Consumption </option>
+          <option value="Weekend Alcohol Consumption"> Weekend Alcohol Consumption </option>
+          <option value="Quality of Family Relationships">Quality of Family Relationships</option>
           </select>
           <br><br>
       </div> 
@@ -293,8 +322,9 @@ def filtering():
           <option value="Average Grade"> Average Grade </option>
           <option value="Number of Failed Subjects"> Number of Failed Subjects </option>
           <option value="Study time"> Study Time </option>
-          <option value="Daily Alcohol Consumption"> Daily Alcohol Consumption </option>
-          <option value="Weekly Alcohol Consumption"> Weekly Alcohol Consumption </option>
+          <option value="Weekday Alcohol Consumption"> Weekday Alcohol Consumption </option>
+          <option value="Weekend Alcohol Consumption"> Weekend Alcohol Consumption </option>
+          <option value="Quality of Family Relationships">Quality of Family Relationships</option>
           </select>
           <br><br>
       </div>
@@ -310,10 +340,6 @@ def filtering():
       </div>
       </form>
       <form action="/"> 
-      <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" id="bottom">
-          <button type="submit" class="homebutton"><b>Go Back To Main Page</b></button>
-          <br><br>
-      </div>
       </form>
       
   </div>
@@ -329,11 +355,15 @@ def filtering():
 def colorgen(num, bins):
   #Color list is from colorbrewer2.org
   colors = ['#f7fbff','#deebf7','#c6dbef','#9ecae1','#6baed6','#4292c6','#2171b5','#084594']
+  #Decide which color group the number is in based on its bin.
   for i in range(len(bins)):
     if num <= bins[i]:
       return colors[i]
 
 def createbins(minnum, maxnum):
+
+  #Calculate the range of data, then create a list of numbers
+  #that represent the threshold for each bin.  
   BINNUM = 7
   binrange = maxnum - minnum
   split = binrange/BINNUM
@@ -354,7 +384,6 @@ def convert_rows_2_cols(data_2d, header):
 		for elem in row:
 			col_dict[header[i]].append(elem)
 			i += 1
-
 	return col_dict
         
 def get_col_types(col_dict, header):
@@ -534,7 +563,6 @@ def apply_operation(operation, lst_vals):
 		ans = min(lst_vals)
 	elif(operation == "Maximum Of"):
 		ans = max(lst_vals)
-	
 	return ans
 	
 def get_average_of(lst_vals):
@@ -543,12 +571,15 @@ def get_average_of(lst_vals):
 	"""
 	return round(float(sum(lst_vals))/len(lst_vals),2)
 
+
 #MAIN
 def main(pRow, pCol, pAg_val, pAg_operatn, fltr_sec, fltr_sign, fltr_val):
 	"""
 	user-selected attributes from the columns of data are organized and 
 	aggregated into a 2d data
 	"""
+
+	print pRow, pCol, pAg_val, pAg_operatn, fltr_sec, fltr_sign, fltr_val
 	
 	fltr_lst = [fltr_sec, fltr_sign, fltr_val]
     #opening csv file
@@ -566,6 +597,7 @@ def main(pRow, pCol, pAg_val, pAg_operatn, fltr_sec, fltr_sign, fltr_val):
 
 	#list of type of data values for each column
 	coltype_dict = defaultdict(str)
+
 	coltype_dict = get_col_types(csv_cols, header)
 
 	#get columns needed
@@ -584,6 +616,34 @@ def main(pRow, pCol, pAg_val, pAg_operatn, fltr_sec, fltr_sign, fltr_val):
 	return data_2d
 
 
+#Function that generates the extra information in the pivot table page
+def keygen(irow,icol):
+
+    #Use a dictionary with the info in it for the program to choose from, depending
+    #On the user's input
+
+    extrainfo = {
+    'Age': ['Numeric from 15-22',],
+    'Sex': ['F - Female', 'M - Male',],
+    'Parent Cohabitation Status': ['T - Living Together', 'A - Living Apart'],
+    'Weekday Alcohol Consumption': ['From 1-5', '1 - Very Low', '5- Very High'],
+    'Weekend Alcohol Consumption': ['From 1-5', '1 - Very Low', '5- Very High'],
+    'Quality of Family Relationships': ['From 1-5', '1 - Very Low', '5- Very High']
+    }
+
+    keyhtml = '''<div id = "keydiv">
+        <h3>Columns: <span style="color:black">%s</span></h3>
+        ''' % icol
+
+    for i in extrainfo[icol]:
+        keyhtml += '<p>%s</p>' % i
+
+    keyhtml += '<h3>Rows: <span style="color:black">%s</span></h3>' % irow
+    for i in extrainfo[irow]:
+        keyhtml += '<p>%s</p>' % i      
+    keyhtml += '</div>'
+    return keyhtml
+
 
 
 @app.route('/handler', methods=['POST'])
@@ -599,7 +659,7 @@ def handler():
 
     #With this function we get an array that contains the processed data
     data_array = main(irow,icol,agg_val,agg_op,fil_sect,fil_sign,fil_val)
-    
+    print data_array
     data = DictReader(open("EditedData3.csv"))
     data = list(data)
 
@@ -623,32 +683,39 @@ def handler():
     html = '''
     <html>
     <head>
+        <title>Pivot Table</title>
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
         <link rel="stylesheet" href="final_pivot.css">
-       
     </head>
     <body>
         <div id="topbar">
-            <div class = "indexdiv"><a href="/"><span id="top">Home</span></a>
-            <a href="/filter"><span id="top">Pivot Table Builder</span></a>
-            <a href="http://www.nyan.cat"><span id="top">Insights</span></a></div>
+        <div class="indexdiv">
+        <a href="/"><span id="top">Home</span></a>
+        <a href="/fulldata"><span id="top">Data</span></a>
+        <a href="/filter"><span id="top">Pivot Table Builder</span></a>
+        <a href="/insights"><span id="top">Insights</span></a>
+        <a href="/about"><span id="top">About Us</span></a>
+        <img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/>
+        </div>
         </div>
         <div id="header">
-            <h1 id = "title">Pivot Table<img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/></h1> 
+            <h1 id = "title">Pivot Table</h1> 
             
         </div>
         <div id="about">
-            <h3>A comparison of the <span id="details">%s</span> : <span id="details">%s</span></h3>
-            <h3>With respect to <span id="details">%s</span> and <span id="details">%s</span></h3>
+            <h3>A comparison of <span id="details">%s</span> and <span id="details">%s</span></h3>
+            <h3>With respect to the <span id="details">%s</span> : <span id="details">%s</span></h3>
             <h3>When %s %s %s</span></h3>
         <hr>
+        <br>
+    <div id="contentdiv">  
+    <div id="tablediv">        
+    <table id="myTable" align = "right"><tr><td></td>
     '''
-                          
-    html += '<table id="myTable"><tr><td></td>'
-    #Add Column Tag
+    #Add Column categories in first
     for col in cols :
         html += '<td>'+col+'</row>'
-    #Add Total Tag
+    #Add Total column
     html += '<td>Total</td>'
     html += '</tr>'
     
@@ -671,7 +738,7 @@ def handler():
         else :
             row.append('-')
         
-    #use createbins
+    #use createbins to find bin ranges
     bins = createbins(minnum, maxnum)
     
     #counter for Row Tag
@@ -701,16 +768,622 @@ def handler():
             if (data_array[col][row]!='-') :
                 total += data_array[col][row]
         html += '<td><strong>%s</strong></td>' % str(total)
-    html +='</tr>'
 
-    html += '</table></body></html>'
+    #And then finish off the table
+    html += '''
+    </tr>
+    </table>
+    </div>
+    '''
+    #Add in the key on the right
+    html += keygen(irow, icol)
+    html += '</div>'
+    html += '</body></html>'
     
     
-    
-    print(data_array)
-    return html % (agg_op,agg_val,irow,icol,fil_sect,fil_sign,fil_val)
-    
+    # print(data_array)
+    return html % (irow,icol,agg_op, agg_val,fil_sect,fil_sign,fil_val)
 
+#Function that takes the desired categories, and returns a dictionary of values
+#to put into the chart    
+def insightgen(category, xaxis, yaxis):
+    read_csv = csv.reader(open("EditedData3.csv"))
+    data = list(read_csv)
+    
+    #First go through the first row and identify
+    #the indexes of the chosen categories
+    for i in data[0]:
+        if i == category:
+            catindex = data[0].index(i)
+        elif i == xaxis:
+            xindex = data[0].index(i)
+        elif i == yaxis:
+            yindex = data[0].index(i)
+
+    #Create a dictionary for each category, each with their own
+    #lists of data
+    cat_dict = {}
+    for row in data[1:]:
+        if row[catindex] not in cat_dict:
+            cat_dict[row[catindex]] = {}
+
+    #Then go through each row in the data and the yaxis value
+    #to the unique xaxis values
+    #xaxis_dict = {}
+    for row in data[1:]:
+        if row[xindex] not in cat_dict[row[catindex]]:
+        	cat_dict[row[catindex]][row[xindex]] = [int(row[yindex])]
+        else:
+        	cat_dict[row[catindex]][row[xindex]].append(int(row[yindex]))
+
+    #After all the data has been written in, replace the list of yaxis values with their 
+    #averages (for purpose of the chart)
+    for category in cat_dict.keys():
+        for xval in cat_dict[category].keys():
+            #cat_dict[category][xval] = get_average_of(cat_dict[category][xval])
+            cat_dict[category][xval] = get_average_of(cat_dict[category][xval])
+
+
+
+    return cat_dict
+
+#Takes as input the key-value pairs to be put into the chart,
+#and returns a sorted list for use in the chart.
+def sorted_list(pairs):
+    pairs.sort()
+
+    final_list = []
+    for i in pairs:
+        final_list.append(i[1])
+    return final_list
+
+
+def negative(array):
+    for i in range (0,len(array)):
+        array[i] = -array[i];
+    return(array);
+
+@app.route('/test')
+def test():
+
+
+    html = str(insightgen("Sex", "Weekend Alcohol Consumption", "Average Grade"))
+
+    return html
+
+@app.route('/insights')
+def insights():
+
+    html = '''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Insights</title>
+        <script src="/jquery.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/insight.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        '''
+
+    data_dict0 = insightgen("Sex", "Age", "Weekday Alcohol Consumption")
+    html += '''
+            <script>
+            $(function(){
+                var myChart = Highcharts.chart('chart0', {
+                    chart: {
+                        type: 'area'
+                    },
+                    title: {
+                        text: 'Changes on Weekday Alcohol Consumption'
+                    },
+                    xAxis: {
+                        text: 'Student Age',
+                        categories: [15,16,17,18,19,20,21,22]
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Weekday Alcohol Consumption'
+                        }
+                    },
+                    series: [{
+                        name: 'Females',
+                        color: '#FFC0CB',
+                        data: %s,
+                    }, {
+                        name: 'Males',
+                        color: '#ADD8E6',
+                        data: %s,
+                    }]
+                });
+            });
+    ''' % (str(sorted_list(data_dict0['F'].items())), str(sorted_list(data_dict0['M'].items())))
+    
+    data_dict0 = insightgen("Sex", "Age", "Weekend Alcohol Consumption")
+    html += '''
+            $(function(){
+                var myChart = Highcharts.chart('chart10', {
+                    chart: {
+                        type: 'area'
+                    },
+                    title: {
+                        text: 'Changes on Weekend Alcohol Consumption'
+                    },
+                    xAxis: {
+                        text: 'Student Age',
+                        categories: [15,16,17,18,19,20,21,22]
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Weekend Alcohol Consumption'
+                        }
+                    },
+                    series: [{
+                        name: 'Females',
+                        color: '#FFC0CB',
+                        data: %s,
+                    }, {
+                        name: 'Males',
+                        color: '#ADD8E6',
+                        data: %s,
+                    }]
+                });
+            });
+    ''' % (str(sorted_list(data_dict0['F'].items())), str(sorted_list(data_dict0['M'].items())))
+    
+        #Create chart one and two, for the effects of weekend/weekday alcohol consumption on grades
+    data_dict1 = insightgen("Sex", "Weekend Alcohol Consumption", "Average Grade")
+    data_dict2 = insightgen("Sex", "Weekday Alcohol Consumption", "Average Grade")
+    html += '''
+            $(function(){
+                var myChart = Highcharts.chart('chart1', {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Weekend'
+                    },
+                    xAxis: {
+                        text: 'Level of Weekend Alcohol Consumption',
+                        categories: [1,2,3,4,5]
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Average Grade'
+                        }
+                    },
+                    series: [{
+                        name: 'Females',
+                        color: '#FFC0CB',
+                        data: %s
+                    }, {
+                        name: 'Males',
+                        color: '#1D83B2',
+                        data: %s
+                    }]
+                });
+            }); ''' % (str(sorted_list(data_dict1['F'].items())), str(sorted_list(data_dict1['M'].items())))
+
+
+    html += '''
+            $(function(){
+                var myChart = Highcharts.chart('chart2', {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Weekday'
+                    },
+                    xAxis: {
+                        text: 'Level of Weekday Alcohol Consumption',
+                        categories: [1,2,3,4,5]
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Average Grade'
+                        }
+                    },
+                    series: [{
+                        name: 'Females',
+                        color: '#FFC0CB',
+                        data: %s
+                    }, {
+                        name: 'Males',
+                        color: '#1D83B2',
+                        data: %s
+                    }]
+                });
+            });
+    ''' % (str(sorted_list(data_dict2['F'].items())), str(sorted_list(data_dict2['M'].items())))
+    
+	#Create chart three, to show the effect of weekend alcohol consumption on no. of failed subjects
+    data_dict1 = insightgen("Sex", "Weekend Alcohol Consumption", "Number of Failed Subjects")
+    html += '''
+            $(function(){
+                var myChart = Highcharts.chart('chart3', {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Weekend'
+                    },
+                    xAxis: {
+                        text: 'Level of Weekend Alcohol Consumption',
+                        categories: [1,2,3,4,5]
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Failed Subjects'
+                        }
+                    },
+                    series: [{
+                        name: 'Females',
+                        color: '#FFC0CB',
+                        data: %s
+                    }, {
+                        name: 'Males',
+                        color: '#1D83B2',
+                        data: %s
+                    }]
+                });
+            });
+    ''' % (str(sorted_list(data_dict1['F'].items())), str(sorted_list(data_dict1['M'].items())))
+    
+    data_dict3 = insightgen("Sex", "Quality of Family Relationships", "Weekend Alcohol Consumption")
+    data_dict4 = insightgen("Parent Cohabitation Status", "Sex", "Average Grade")
+    html += '''
+			$(function(){
+				var myChart = Highcharts.chart('chart4', {
+					chart: {
+						type: 'bar'
+					},
+					
+					title: {
+						text: 'Quality of Family Relationship vs Weekend Alcohol Consumption'
+					},
+						
+					xAxis: {
+						title: {
+							text: 'Quality of Family Relationships'
+						},
+						categories: [1, 2, 3, 4, 5]
+					},
+						
+					yAxis: {
+						min: 0,
+						title: {
+							text: 'Level of Weekend Alcohol Consumption'
+						}
+					},
+					
+					legend: {
+						reversed: true
+					},
+					
+					plotOptions: {
+						series: {
+							stacking: 'normal'
+						}
+					},
+					
+					series: [{
+						name: 'Males',
+                     color: '#1D83B2',
+						data: %s
+					}, {
+						name: 'Females',
+                     color: '#FFC0CB',
+						data: %s
+					}]
+				});
+			});
+	'''%(str(sorted_list(data_dict3['M'].items())), str(sorted_list(data_dict3['F'].items())))
+    
+    html += '''
+			$(function(){
+				var myChart = Highcharts.chart('chart5', {
+					chart: {
+						type: 'column'
+					},
+					title: {
+						text: 'Parent Cohabitation Status vs Average Grade'
+					},
+					xAxis: {
+						title: {
+							text: 'Sex'
+						},
+						categories: ['M', 'F'],
+						crosshair: true
+					},
+					yAxis: {
+						min: 0,
+						title: {
+							text: 'Average Grade'
+						}
+					},
+					tooltip: {
+						headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+						pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+							'<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+						footerFormat: '</table>',
+						shared: true,
+						useHTML: true
+					},
+					plotOptions: {
+						column: {
+							pointPadding: 0.2,
+							borderWidth: 0
+						}
+					},
+					series: [{
+						name: 'Apart',
+                    color: '#808080',
+						data: %s
+				
+					}, {
+						name: 'Together',
+                    color: 'black',
+						data: %s
+				
+					}]
+				});
+			});
+	''' % (str(sorted_list(data_dict4['A'].items())), str(sorted_list(data_dict4['T'].items())))
+    
+    data_dict1 = insightgen("Sex", "Weekend Alcohol Consumption", "Study time")
+    html += '''
+            $(function(){
+                var myChart = Highcharts.chart('chart8', {
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: 'Weekend Consumption vs Study Time by Sex'
+                    },
+                    xAxis: [{
+                        title: {
+                        text: 'Weekend Alcohol Consumption'
+                        },
+                        categories: [1,2,3,4,5],
+                        reversed: false,
+                        labels: {
+                                step: 1
+                        }
+                    },{ // mirror axis on right side
+                        title: {
+                        text: 'Weekend Alcohol Consumption'
+                        },
+                        opposite: true,
+                        reversed: false,
+                        categories: [1,2,3,4,5],
+                        linkedTo: 0,
+                        labels: {
+                                step: 1
+                                }
+                    }],
+                    yAxis: {
+                        title: {
+                            text: 'Average Study time'
+                        },
+                        labels: { 
+                                formatter: function () {
+                                    return Math.abs(this.value);
+                                }
+                        }
+                    },
+                    plotOptions: {
+                        series: {
+                            stacking: 'normal'
+                        }
+                    },
+                    tooltip: {
+                        formatter: function () {
+                            return '<b>' + this.series.name + ', Consumption ' + this.point.category + '</b><br/>' +
+                            'Avg Study Time: ' + Highcharts.numberFormat(Math.abs(this.point.y), 2);
+                        }
+                    },
+                    series: [{
+                        name: 'Females',
+                        color: '#FFC0CB',
+                        data: %s
+                    }, {
+                        name: 'Males',
+                        color: '#1D83B2',
+                        data: %s
+                    }]
+                });
+            });
+    ''' % (str(negative(sorted_list(data_dict1['F'].items()))), str((sorted_list(data_dict1['M'].items()))))
+    
+    data_dict1 = insightgen("Sex", "Weekday Alcohol Consumption", "Study time")
+    html += '''
+            $(function(){
+                var myChart = Highcharts.chart('chart9', {
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: 'Weekdays Consumption vs Study Time by Sex'
+                    },
+                    xAxis: [{
+                        title: {
+                        text: 'Weekday Alcohol Consumption'
+                        },
+                        categories: [1,2,3,4,5],
+                        reversed: false,
+                        labels: {
+                                step: 1
+                        }
+                    },{ // mirror axis on right side
+                        title: {
+                        text: 'Weekday Alcohol Consumption'
+                        },
+                        opposite: true,
+                        reversed: false,
+                        categories: [1,2,3,4,5],
+                        linkedTo: 0,
+                        labels: {
+                                step: 1
+                                }
+                    }],
+                    yAxis: {
+                        title: {
+                            text: 'Average Study time'
+                        },
+                        labels: { 
+                                formatter: function () {
+                                    return Math.abs(this.value);
+                                }
+                        }
+                    },
+                    plotOptions: {
+                        series: {
+                            stacking: 'normal'
+                        }
+                    },
+                    tooltip: {
+                        formatter: function () {
+                            return '<b>' + this.series.name + ', Consumption ' + this.point.category + '</b><br/>' +
+                            'Avg Study Time: ' + Highcharts.numberFormat(Math.abs(this.point.y), 2);
+                        }
+                    },
+                    series: [{
+                        name: 'Females',
+                        color: '#FFC0CB',
+                        data: %s
+                    }, {
+                        name: 'Males',
+                        color: '#1D83B2',
+                        data: %s
+                    }]
+                });
+            });
+    ''' % (str(negative(sorted_list(data_dict1['F'].items()))), str((sorted_list(data_dict1['M'].items()))))
+    
+        
+    html += '''
+        </script>
+    </head>
+    <body>
+    <div id="topbar">
+        <div class="indexdiv">
+        <a href="/"><span id="top">Home</span></a>
+        <a href="/fulldata"><span id="top">Data</span></a>
+        <a href="/filter"><span id="top">Pivot Table Builder</span></a>
+        <a href="/insights"><span id="top">Insights</span></a>
+        <a href="/about"><span id="top">About Us</span></a>
+        <img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/>
+        </div>
+    </div>
+    <div id="description" style="text-align:center">
+        <h2>Examining the Relationships between home life, alcohol consumption
+            and education.</h2>
+    </div>
+        
+    <div class="row" id="age_sex_consumption">
+        <div class="col-md-12 col-xs-12 col-lg-12 col-xs-12">
+        <h3> Intro : Trends in Alcohol consumption</h3>
+        <ul> 
+        <li> This shows us as they get older on average female students consume less alcohol, while male students consume more.</li>
+        </ul>
+        </div>
+        <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+        <div id="chart0" class="chart" style="width:100%;"></div>
+        </div>     
+        <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+        <div id="chart10" class="chart" style="width:100%;"></div>
+        </div>       
+    </div>
+    
+    <div class="row" id="alcohol_average_sex">
+        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+        <h3> The Effect of Weekday and Weekend Alcohol Consumption on Student's Average Grade</h3>
+        <ul> 
+        <li> Interestingly, there doesn't appear to be a clear negative association between level of 
+            alcohol consumption and average grade. </li>
+        <li>The only hint of declining grades is evident in Males who drink more on the Weekends. </li>
+        <li>According to the data, we can all go out and drink as much as we want and still maintain our grades. </li>
+        </ul>
+        </div>
+        <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+        <div id="chart1" class="chart" style="width:100%;"></div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+        <div id="chart2" class="chart" style="width:100%;"></div>
+        </div>
+    </div>
+    
+    <div class="row" id="weekendalc_fail_sex">
+        <div class="col-md-6 col-xs-12 col-lg-6 col-xs-12">
+        <h3> The Effect of Weekend Alcohol Consumption on Student's Number of Failed Subjects</h3>
+        <ul> 
+        <li> This shows us something more intuitive, that the greater people of both sexes consume alcohol 
+            on the weekends, the more subjects they fail.</li>
+        </ul>
+        </div>
+        <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+        <div id="chart3" class="chart" style="width:100%;"></div>
+        </div>       
+    </div>
+    
+    <div class="row" id="family_weekendalc_sex">
+        <div class="col-md-6 col-xs-12 col-lg-6 col-xs-12">
+        <h3> The Effect of Family Relationship Quality on Student's Weekend Alcohol Consumption</h3>
+        <ul> 
+        <li> The graph tells us that as the quality of family relationships decreases for males,
+            the level of their alcohol consumption will most likely increase.</li>
+        <li> On the other hand, this decreasing trend is not evident for females. </li>
+        <li> Therefore, it can be concluded that a females' alcohol consumption is not affected by their
+            relationship with their family. </li>
+        </ul>
+        </div>
+        <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+        <div id="chart4" class="chart" style="width:100%;"></div>
+        </div>       
+    </div>
+    
+    <div class="row" id="cohabitation_average_sex">
+        <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+        <h3> The Effect of Parent's Cohabitation Status on Student's Average Grade</h3>
+        <ul> 
+        <li> This demonstrates similar average grades in males, regardless
+            of their parents' cohabitation status.</li>
+        <li> Therefore, male youths' grades will not be affected by their 
+            parent's cohabitation status. </li>
+        <li> However, it is observed that females will have a higher average grade
+			when their parents are apart than when they're together. </li>
+        </ul>
+        </div>
+        <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+        <div id="chart5" class="chart" style="width:100%;"></div>
+        </div>
+    </div>
+    
+    <div class="row" id="alcohol_study_sex">
+        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+        <h3> The Effect of Weekday and Weekend Alcohol Consumption on Student's Study Time</h3>
+        <ul> 
+        <li> From the graph we can see that alcohol consumptions during the weekend affect both gender (Female and Male), as they consume more
+        alcohol during the weekend, their study time decrease. </li>
+        <li> Even so, it seems that alcohol consumptions during the weekdays affect the female group more clearly and significant from
+        the data of our graph. </li>
+        </ul>
+        </div>
+        <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+        <div id="chart8" class="chart" style="width:100%;"></div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+        <div id="chart9" class="chart" style="width:100%;"></div>
+        </div>
+    </div>
+
+    </body>
+    </html>
+    '''
+
+    return html
 
 if __name__ == "__main__":
     app.run(debug=True, host='127.0.0.1', port=80)
