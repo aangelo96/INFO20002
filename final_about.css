@@ -53,7 +53,7 @@ html, body{
 .about {
     text-align: left;
     height: 500px;
-    width: 48%;
+    width: 45%;
     padding: 10px;
     margin: auto;
     /*background-color: #EFEFEF;*/
@@ -64,6 +64,7 @@ html, body{
 #left {
     float: left;
     height: 250px;
+    width: 45%;
 
 }
 
