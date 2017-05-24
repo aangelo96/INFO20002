@@ -14,60 +14,72 @@ app = Flask(__name__, static_folder='.', static_url_path='')
 @app.route('/about')
 def route():
     home_page = '''
-<!doctype html>
-<html>
-<head>
-    <title>About Us</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="final_home.css">
-    
-</head>
-<body>
-<div id="topbar">
-    <div class="indexdiv">
-        <a href="/"><span id="top">Home</span></a>
-        <a href="/fulldata"><span id="top">Data</span></a>
-        <a href="/filter"><span id="top">Pivot Table Builder</span></a>
-        <a href="/insights"><span id="top">Insights</span></a>
-        <a href="/about"><span id="top">About Us</span></a>
-        <img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/>
-    </div>
-</div>
-<h1 align="center"> Alcoholic Data Set and Pivot Table Builder</h1>
-<br>
-<p id="aop"> About Our Project : </p>
-<ul id="about">
-    <li> What is our Data About ? <br>
-         Our Data is about <b>Student Alcohol Consumption</b> of some secondary school students </li>
-    <li> Where do we obtained this Data ? <br>
-         We obtained our data from <a href="https://www.kaggle.com/uciml/student-alcohol-consumption">Keggle</a> !!! </li>
-    <li> What are the "attributes" we used for our project ? <br>
-         For this project, we are only using these attributes : 
-         <ol>
-             <li> Sex </li>
-             <li> Age </li>
-             <li> Parents Cohabitation Status </li>
-             <li> Study Time </li>
-             <li> Number of Failed Subject </li>
-             <li> Weekday Alcohol Consumption </li>
-             <li> Weekend Alcohol Consumption </li>
-             <li> Number of Absences </li>
-             <li> Average Grade </li>
-         </ol>
-</ul>
-<div class="container">
-    <h2 align=center> Our Team Member </h2>
-    <br>
-    <p> Arnold Angelo - 783859 </p>
-    <br>
-    <p> Ethan Cheng - </p>
-    <br>
-    <p> Jorjilou Reyes - 836917 </p>
-    <br>
-</body>
-</html>
-'''
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <link rel="stylesheet" href="final_about.css">
+            <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        </head>
+        <body>
+            <div id="topbar">
+                <div class = "indexdiv">
+                <a href="/"><span id="top">Home</span></a>
+                <a href="/filter"><span id="top">Pivot Table Builder</span></a>
+                <a href="/insights"><span id="top">Insights</span></a>
+                <a href="/fulldata"><span id="top">Data</span></a>
+                </div>
+            </div>
+
+            <div id="content">
+                <div class="about" id = "left">
+                    <div>
+                        <h2>About Our Dataset</h2>
+                        <p>
+                            Our data set was obtained from 
+                            <a href="https://www.kaggle.com/uciml/student-alcohol-consumption">Kaggle</a>
+                            , and was generated through a survey
+                            of students' math courses in secondary school. It contains
+                            alot of information relating to their family situation, school performance,
+                            as well as quality of life indicators.
+                        </p>
+                    </div>
+                    <div>
+                        <h2>About Us</h2>
+                        <p>Arnold Angelo - 783859</p>
+                        <p>Ethan Cheng - 762061</p>
+                        <p>Jorjilou Reyes - 836917</p>
+                    </div>
+                </div>            
+                <div class="about">
+                    <h2>Data Used</h2>
+                    <p>
+                        For the purpose of discussion, we have decided to omit some 
+                        categories, and only include the categories which we felt were
+                        more relevant to what we are trying to discuss
+
+                        </br></br>
+                        <span style="text-align:left">Data contained:</span> </br>
+                    </p>
+
+                    <ul>
+                        <li>Sex</li>
+                        <li>Age</li>
+                        <li>Parent Cohabitation Status</li>
+                        <li>Study Time</li>
+                        <li>Number of Failed Subjects</li>
+                        <li>Weekday Alcohol Consumption</li>
+                        <li>Weekend Alcohol Consumption</li>
+                        <li>Number of Absences</li>
+                        <li>Average Grade</li>
+                        <li>Quality of Family Relationships</li>
+                </div>    
+
+            </div>
+
+        </body>
+        </html>
+
+    '''
     return home_page
 
 #Home Page
