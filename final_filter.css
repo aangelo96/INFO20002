@@ -5,6 +5,9 @@
     padding-top: 10px;
 }
 
+a:hover {
+    text-decoration: none;
+}
 #top {
   background-color: orange;
   color : #EFEFEF;
@@ -90,4 +93,8 @@ body {
 
 hr {
   border-color: orange;
+}
+
+button, input {
+    font-family: 'Raleway', sans-serif;
 }
