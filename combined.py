@@ -10,9 +10,81 @@ from collections import defaultdict
 
 app = Flask(__name__, static_folder='.', static_url_path='')
 
+
 #About Us Page
 @app.route('/about')
 def route():
+    home_page = '''
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <link rel="stylesheet" href="final_about.css">
+            <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        </head>
+        <body>
+            <div id="topbar">
+                <div class = "indexdiv">
+                <a href="/"><span id="top">Home</span></a>
+                <a href="/filter"><span id="top">Pivot Table Builder</span></a>
+                <a href="/insights"><span id="top">Insights</span></a>
+                <a href="/fulldata"><span id="top">Data</span></a>
+                </div>
+            </div>
+
+            <div id="content">
+                <div class="about" id = "left">
+                    <div>
+                        <h2>About Our Dataset</h2>
+                        <p>
+                            Our data set was obtained from 
+                            <a href="https://www.kaggle.com/uciml/student-alcohol-consumption">Kaggle</a>
+                            , and was generated through a survey
+                            of students' math courses in secondary school. It contains
+                            alot of information relating to their family situation, school performance,
+                            as well as quality of life indicators.
+                        </p>
+                    </div>
+                    <div>
+                        <h2>About Us</h2>
+                        <p>Arnold Angelo - 783859</p>
+                        <p>Ethan Cheng - 762061</p>
+                        <p>Jorjilou Reyes - 836917</p>
+                    </div>
+                </div>            
+                <div class="about">
+                    <h2>Data Used</h2>
+                    <p>
+                        For the purpose of discussion, we have decided to omit some 
+                        categories, and only include the categories which we felt were
+                        more relevant to what we are trying to discuss
+
+                        </br></br>
+                        <span style="text-align:left">Data contained:</span> </br>
+                    </p>
+
+                    <ul>
+                        <li>Sex</li>
+                        <li>Age</li>
+                        <li>Parent Cohabitation Status</li>
+                        <li>Study Time</li>
+                        <li>Number of Failed Subjects</li>
+                        <li>Weekday Alcohol Consumption</li>
+                        <li>Weekend Alcohol Consumption</li>
+                        <li>Number of Absences</li>
+                        <li>Average Grade</li>
+                        <li>Quality of Family Relationships</li>
+                </div>    
+
+            </div>
+
+        </body>
+        </html>
+
+    '''
+    return home_page
+
+@app.route('/test')
+def test():
     home_page = '''
 <!doctype html>
 <html>
@@ -70,6 +142,7 @@ def route():
 '''
     return home_page
 
+
 #Home Page
 @app.route('/')
 def homeroute():
@@ -95,7 +168,6 @@ def homeroute():
             <div class="link"><a href="/filter">Pivot Table Builder</a></div>
             <div class="link"><a href="/insights">Insights</a></div>
             <div class="link"><a href="/about">About Us</a></div>
-            
         </div>
     </div>
 </body>
@@ -110,7 +182,6 @@ def fulldata():
 <!doctype html>
 <html>
 <head>
-    <link rel="icon" href="http://example.com/favicon.png">
     <title>Full Data</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -1380,6 +1451,468 @@ def insights():
         </div>
     </div>
 
+#Function that takes the desired categories, and returns a dictionary of values
+#to put into the chart    
+def insightgen(category, xaxis, yaxis):
+    read_csv = csv.reader(open("EditedData3.csv"))
+    data = list(read_csv)
+    
+    #First go through the first row and identify
+    #the indexes of the chosen categories
+    for i in data[0]:
+        if i == category:
+            catindex = data[0].index(i)
+        elif i == xaxis:
+            xindex = data[0].index(i)
+        elif i == yaxis:
+            yindex = data[0].index(i)
+
+    #Create a dictionary for each category, each with their own
+    #lists of data
+    cat_dict = {}
+    for row in data[1:]:
+        if row[catindex] not in cat_dict:
+            cat_dict[row[catindex]] = {}
+
+    #Then go through each row in the data and the yaxis value
+    #to the unique xaxis values
+    xaxis_dict = {}
+    for row in data[1:]:
+        if row[xindex] not in cat_dict[row[catindex]]:
+        	cat_dict[row[catindex]][row[xindex]] = [int(row[yindex])]
+        else:
+        	cat_dict[row[catindex]][row[xindex]].append(int(row[yindex]))
+
+    #After all the data has been written in, replace the list of yaxis values with their 
+    #averages (for purpose of the chart)
+    for category in cat_dict.keys():
+        for xval in cat_dict[category].keys():
+            #cat_dict[category][xval] = get_average_of(cat_dict[category][xval])
+            cat_dict[category][xval] = get_average_of(cat_dict[category][xval])
+
+
+
+    return cat_dict
+
+#Takes as input the key-value pairs to be put into the chart,
+#and returns a sorted list for use in the chart.
+def sorted_list(pairs):
+    pairs.sort()
+
+    final_list = []
+    for i in pairs:
+        final_list.append(i[1])
+    return final_list
+
+@app.route('/insights')
+def insights():
+
+
+
+    data_dict = insightgen("Sex", "Weekend Alcohol Consumption", "Average Grade")
+
+    html = '''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Insights</title>
+        <script src="/jquery.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <link rel="stylesheet" href="/insight.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        '''
+
+        #Create chart one and two, for the effects of weekend/weekday alcohol consumption on grades
+    data_dict1 = insightgen("Sex", "Weekend Alcohol Consumption", "Average Grade")
+    data_dict2 = insightgen("Sex", "Weekday Alcohol Consumption", "Average Grade")
+    html += '''
+        <script>
+            $(function(){
+                var myChart = Highcharts.chart('chart1', {
+                    chart: {
+                        type: 'line'
+                    },
+
+                    title: {
+                        text: 'Weekend'
+                    },
+
+                    xAxis: {
+                        text: 'Level of Weekend Alcohol Consumption',
+                        categories: [1,2,3,4,5]
+                    },
+
+                    yAxis: {
+                        title: {
+                            text: 'Average Grade'
+                        }
+                    },
+
+                    series: [{
+                        name: 'Females',
+                        data: %s
+                    }, {
+                        name: 'Males',
+                        data: %s
+                    }]
+                });
+
+            }); ''' % (str(sorted_list(data_dict1['F'].items())), str(sorted_list(data_dict1['M'].items())))
+
+
+    html += '''
+            $(function(){
+                var myChart = Highcharts.chart('chart2', {
+                    chart: {
+                        type: 'line'
+                    },
+
+                    title: {
+                        text: 'Weekday'
+                    },
+
+                    xAxis: {
+                        text: 'Level of Weekday Alcohol Consumption',
+                        categories: [1,2,3,4,5]
+                    },
+
+                    yAxis: {
+                        title: {
+                            text: 'Average Grade'
+                        }
+                    },
+
+                    series: [{
+                        name: 'Females',
+                        data: %s
+                    }, {
+                        name: 'Males',
+                        data: %s
+                    }]
+                });
+
+            });
+
+    ''' % (str(sorted_list(data_dict2['F'].items())), str(sorted_list(data_dict2['M'].items())))
+    
+	#Create chart three, to show the effect of weekend alcohol consumption on no. of failed subjects
+    data_dict1 = insightgen("Sex", "Weekend Alcohol Consumption", "Number of Failed Subjects")
+    html += '''
+            $(function(){
+                var myChart = Highcharts.chart('chart3', {
+                    chart: {
+                        type: 'line'
+                    },
+
+                    title: {
+                        text: 'Weekend'
+                    },
+
+                    xAxis: {
+                        text: 'Level of Weekend Alcohol Consumption',
+                        categories: [1,2,3,4,5]
+                    },
+
+                    yAxis: {
+                        title: {
+                            text: 'Failed Subjects'
+                        }
+                    },
+
+                    series: [{
+                        name: 'Females',
+                        data: %s
+                    }, {
+                        name: 'Males',
+                        data: %s
+                    }]
+                });
+
+            });
+    ''' % (str(sorted_list(data_dict1['F'].items())), str(sorted_list(data_dict1['M'].items())))
+    
+    data_dict3 = insightgen("Sex", "Quality of Family Relationships", "Weekend Alcohol Consumption")
+    data_dict4 = insightgen("Parent Cohabitation Status", "Sex", "Average Grade")
+    html += '''
+			$(function(){
+				var myChart = Highcharts.chart('chart4', {
+					chart: {
+						type: 'bar'
+					},
+					
+					title: {
+						text: 'Quality of Family Relationship vs Weekend Alcohol Consumption'
+					},
+						
+					xAxis: {
+						title: {
+							text: 'Quality of Family Relationships'
+						},
+						categories: [1, 2, 3, 4, 5]
+					},
+						
+					yAxis: {
+						min: 0,
+						title: {
+							text: 'Level of Weekend Alcohol Consumption'
+						}
+					},
+					
+					legend: {
+						reversed: true
+					},
+					
+					plotOptions: {
+						series: {
+							stacking: 'normal'
+						}
+					},
+					
+					series: [{
+						name: 'Males',
+						data: %s
+					}, {
+						name: 'Females',
+						data: %s
+					}]
+				});
+			});
+	'''%(str(sorted_list(data_dict3['M'].items())), str(sorted_list(data_dict3['F'].items())))
+    
+    html += '''
+			$(function(){
+				var myChart = Highcharts.chart('chart5', {
+					chart: {
+						type: 'column'
+					},
+					title: {
+						text: 'Parent Cohabitation Status vs Average Grade'
+					},
+					xAxis: {
+						title: {
+							text: 'Sex'
+						},
+						categories: ['M', 'F'],
+						crosshair: true
+					},
+					yAxis: {
+						min: 0,
+						title: {
+							text: 'Average Grade'
+						}
+					},
+					tooltip: {
+						headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+						pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+							'<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+						footerFormat: '</table>',
+						shared: true,
+						useHTML: true
+					},
+					plotOptions: {
+						column: {
+							pointPadding: 0.2,
+							borderWidth: 0
+						}
+					},
+					series: [{
+						name: 'Apart',
+						data: %s
+				
+					}, {
+						name: 'Together',
+						data: %s
+				
+					}]
+				});
+			});
+	''' % (str(sorted_list(data_dict4['A'].items())), str(sorted_list(data_dict4['T'].items())))
+    
+    data_dict5 = insightgen("Sex", "Weekend Alcohol Consumption", "Study time")
+    data_dict6 = insightgen("Sex", "Weekday Alcohol Consumption", "Study time")
+    html += '''
+            $(function(){
+                var myChart = Highcharts.chart('chart6', {
+
+                    title: {
+                        text: 'Weekend'
+                    },
+                    
+                    xAxis: {
+                        categories: [1,2,3,4,5],
+                        title: {
+                            text: 'Level of Alcohol Consumption'
+                        }
+                    },
+                
+                    yAxis: {
+                        title: {
+                            text: 'Study Time'
+                        }
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle'
+                    },
+                
+                    plotOptions: {
+                        series: {
+                            pointStart: 0
+                        }
+                    },
+                
+                    series: [{
+                        name: 'Females',
+                        data: %s
+                    }, {
+                        name: 'Males',
+                        data: %s
+                    }]
+                
+                });
+            });
+    ''' % (str(sorted_list(data_dict5['F'].items())), str(sorted_list(data_dict5['M'].items())))
+    
+    html += '''
+            $(function(){
+                var myChart = Highcharts.chart('chart7', {
+
+                    title: {
+                        text: 'Weekday'
+                    },
+                    
+                    xAxis: {
+                        categories: [1,2,3,4,5],
+                        title: {
+                            text: 'Level of Alcohol Consumption'
+                        }
+                    },
+                
+                    yAxis: {
+                        title: {
+                            text: 'Study Time'
+                        }
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle'
+                    },
+                
+                    plotOptions: {
+                        series: {
+                            pointStart: 0
+                        }
+                    },
+                
+                    series: [{
+                        name: 'Females',
+                        data: %s
+                    }, {
+                        name: 'Males',
+                        data: %s
+                    }]
+                
+                });
+            });
+    ''' % (str(sorted_list(data_dict6['F'].items())), str(sorted_list(data_dict6['M'].items())))
+
+    
+        
+	
+    html += '''
+        </script>
+    </head>
+    <body>
+    <div id="topbar">
+        <div class = "indexdiv">
+        <a href="/about"><span id="top">About Us</span></a>
+        <a href="/"><span id="top">Home</span></a>
+        <a href="/filter"><span id="top">Pivot Table Builder</span></a>
+        <a href="/fulldata"><span id="top">Data</span></a>
+        </div>
+    </div>
+
+    <div id="description">
+        <h2>Hypothesis: A student's education is affected by their level of alcohol consumption and quality of home life.</h2>
+    </div>
+
+    <div class="discussion">
+        <div class="text">
+            <h2><strong>The Effect of Weekday/Weekend Alcohol Consumption on Average Grade</strong></h2>
+            <p>Interestingly, there doesn't appear to be a clear negative association between level of 
+            alcohol consumption and average grade. 
+            </br></br>
+            The only hint of declining grades is evident in Males who drink more on the Weekends.
+
+            </br></br>
+            According to the data, we can all go out and drink as much as we want and still maintain our grades.
+
+            </p>
+        </div>
+        <div id="chart1" class="chart"></div>
+        <div id="chart2" class="chart"></div>
+    </div>
+
+    <div class="discussion">
+        <div class="text">
+            <h2>Weekend Alcohol Consumption and Number of Failed Subjects</h2>
+            <p>
+            This shows us something more intuitive, that the greater people of both sexes consume alcohol 
+            on the weekends, the more subjects they fail.
+            </p>
+        </div>
+        <div id="chart3" class="chart"></div>
+    </div>
+    
+    <div class="discussion">
+        <div class="text">
+            <h2>Quality of Family Relationships vs Weekend Alcohol Consumption</h2>
+            <p>
+            The graph tells us that as the quality of family relationships decreases for males,
+            the level of their alcohol consumption will most likely increase.
+            </br></br>
+            On the other hand, this decreasing trend is not evident for females.
+            </br></br>
+            Therefore, it can be concluded that a females' alcohol consumption is not affected by their
+            relationship with their family.
+            </p>
+        </div>
+        <div id="chart4" class="chart"></div>
+    </div>
+    
+    <div class="discussion">
+        <div class="text">
+            <h2>Parent's Cohabitation Status vs Average Grade</h2>
+            <p>
+            This demonstrates similar average grades in males, regardless
+            of their parents' cohabitation status.
+            </br> </br>
+            Therefore, male youths' grades will not be affected by their 
+            parent's cohabitation status.
+            </br></br>
+			However, it is observed that females will have a higher average grade
+			when their parents are apart than when they're together
+            </p>
+        </div>
+        <div id="chart5" class="chart"></div>
+    </div>
+    
+    <div class="discussion">
+        <div class="text">
+            <h2>Weekend/Weekday Alcohol Consumption vs Study Time</h2>
+            <p>
+            Overall, as the student's alcohol consumption increases during the
+            weekend or weekdays, their study time decreases.
+            </br></br>
+            However, male students' study time is not affected as much during
+            the weekdays by the level of alcohol they consume.
+            </p>
+        </div>
+        <div id="chart6" class="chart"></div>
+        <div id="chart7" class="chart"></div>
+    </div>
     </body>
     </html>
     '''

@@ -68,6 +68,19 @@ html,body {
     /*padding-top: 10px;*/
     position: relative;
 }
+#top {
+  background-color: orange;
+  color : #EFEFEF;
+  padding : 10px;
+  border-radius: 8px;
+  border-width: 20px;
+  border-color: blue;
+}
+
+#top:hover {
+  background-color: #EFEFEF;
+  color : orange;
+}
 .indexdiv {
     top:20px;
     white-space: nowrap;
@@ -107,6 +120,23 @@ h3 {
   width: 30%;
   clear: right;
   display: inline-block;
+}
+
+#keydiv h3 {
+  text-align: left;
+  color: red;
+}
+
+p {
+  font-family: 'Raleway', sans-serif;
+}
+table {
+
+  padding-right: 20%;
+}
+
+.key {
+  color: black;
 }
 
 #keydiv h3 {
