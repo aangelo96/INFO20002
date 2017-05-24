@@ -14,23 +14,29 @@ app = Flask(__name__, static_folder='.', static_url_path='')
 @app.route('/about')
 def route():
     home_page = '''
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <link rel="stylesheet" href="final_about.css">
-            <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-        </head>
-        <body>
-            <div id="topbar">
-                <div class = "indexdiv">
-                <a href="/"><span id="top">Home</span></a>
-                <a href="/filter"><span id="top">Pivot Table Builder</span></a>
-                <a href="/insights"><span id="top">Insights</span></a>
-                <a href="/fulldata"><span id="top">Data</span></a>
-                </div>
-            </div>
-
-            <div id="content">
+<!doctype html>
+<html>
+<head>
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="final_about.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    
+</head>
+<body>
+<div id="topbar">
+    <div class="indexdiv">
+        <a href="/"><span id="top">Home</span></a>
+        <a href="/fulldata"><span id="top">Data</span></a>
+        <a href="/filter"><span id="top">Pivot Table Builder</span></a>
+        <a href="/insights"><span id="top">Insights</span></a>
+        <a href="/about"><span id="top">About Us</span></a>
+        <img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/>
+    </div>
+</div>
+<h1 align="center"> Alcoholic Data Set and Pivot Table Builder</h1>
+<br>
+<div id="content">
                 <div class="about" id = "left">
                     <div>
                         <h2>About Our Dataset</h2>
@@ -74,12 +80,10 @@ def route():
                         <li>Quality of Family Relationships</li>
                 </div>    
 
-            </div>
-
-        </body>
-        </html>
-
-    '''
+</div>
+</body>
+</html>
+'''
     return home_page
 
 #Home Page
@@ -229,6 +233,7 @@ def filtering():
     <title>Pivot Builder</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="final_filter.css">
    
 </head>
