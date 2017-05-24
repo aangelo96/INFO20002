@@ -15,77 +15,6 @@ app = Flask(__name__, static_folder='.', static_url_path='')
 @app.route('/about')
 def route():
     home_page = '''
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <link rel="stylesheet" href="final_about.css">
-            <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-        </head>
-        <body>
-            <div id="topbar">
-                <div class = "indexdiv">
-                <a href="/"><span id="top">Home</span></a>
-                <a href="/filter"><span id="top">Pivot Table Builder</span></a>
-                <a href="/insights"><span id="top">Insights</span></a>
-                <a href="/fulldata"><span id="top">Data</span></a>
-                </div>
-            </div>
-
-            <div id="content">
-                <div class="about" id = "left">
-                    <div>
-                        <h2>About Our Dataset</h2>
-                        <p>
-                            Our data set was obtained from 
-                            <a href="https://www.kaggle.com/uciml/student-alcohol-consumption">Kaggle</a>
-                            , and was generated through a survey
-                            of students' math courses in secondary school. It contains
-                            alot of information relating to their family situation, school performance,
-                            as well as quality of life indicators.
-                        </p>
-                    </div>
-                    <div>
-                        <h2>About Us</h2>
-                        <p>Arnold Angelo - 783859</p>
-                        <p>Ethan Cheng - 762061</p>
-                        <p>Jorjilou Reyes - 836917</p>
-                    </div>
-                </div>            
-                <div class="about">
-                    <h2>Data Used</h2>
-                    <p>
-                        For the purpose of discussion, we have decided to omit some 
-                        categories, and only include the categories which we felt were
-                        more relevant to what we are trying to discuss
-
-                        </br></br>
-                        <span style="text-align:left">Data contained:</span> </br>
-                    </p>
-
-                    <ul>
-                        <li>Sex</li>
-                        <li>Age</li>
-                        <li>Parent Cohabitation Status</li>
-                        <li>Study Time</li>
-                        <li>Number of Failed Subjects</li>
-                        <li>Weekday Alcohol Consumption</li>
-                        <li>Weekend Alcohol Consumption</li>
-                        <li>Number of Absences</li>
-                        <li>Average Grade</li>
-                        <li>Quality of Family Relationships</li>
-                </div>    
-
-            </div>
-
-        </body>
-        </html>
-
-    '''
-    return home_page
-
-@app.route('/test')
-def test():
-    home_page = '''
 <!doctype html>
 <html>
 <head>
@@ -1504,6 +1433,14 @@ def sorted_list(pairs):
         final_list.append(i[1])
     return final_list
 
+@app.route('/test')
+def test():
+
+
+    html = str(insightgen("Sex", "Weekend Alcohol Consumption", "Average Grade"))
+
+    return html
+
 @app.route('/insights')
 def insights():
 
@@ -1835,7 +1772,8 @@ def insights():
     </div>
 
     <div id="description">
-        <h2>Hypothesis: A student's education is affected by their level of alcohol consumption and quality of home life.</h2>
+        <h2>Examining the Relationships between home life, alcohol consumption
+            and education.</h2>
     </div>
 
     <div class="discussion">
