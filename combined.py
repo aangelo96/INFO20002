@@ -83,66 +83,6 @@ def route():
     '''
     return home_page
 
-@app.route('/test')
-def test():
-    home_page = '''
-<!doctype html>
-<html>
-<head>
-    <title>About Us</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="final_home.css">
-    
-</head>
-<body>
-<div id="topbar">
-    <div class="indexdiv">
-        <a href="/"><span id="top">Home</span></a>
-        <a href="/fulldata"><span id="top">Data</span></a>
-        <a href="/filter"><span id="top">Pivot Table Builder</span></a>
-        <a href="/insights"><span id="top">Insights</span></a>
-        <a href="/about"><span id="top">About Us</span></a>
-        <img id = "beer" src="https://image.flaticon.com/icons/svg/126/126613.svg"/>
-    </div>
-</div>
-<h1 align="center"> Alcoholic Data Set and Pivot Table Builder</h1>
-<br>
-<p id="aop"> About Our Project : </p>
-<ul id="about">
-    <li> What is our Data About ? <br>
-         Our Data is about <b>Student Alcohol Consumption</b> of some secondary school students </li>
-    <li> Where do we obtained this Data ? <br>
-         We obtained our data from <a href="https://www.kaggle.com/uciml/student-alcohol-consumption">Keggle</a> !!! </li>
-    <li> What are the "attributes" we used for our project ? <br>
-         For this project, we are only using these attributes : 
-         <ol>
-             <li> Sex </li>
-             <li> Age </li>
-             <li> Parents Cohabitation Status </li>
-             <li> Study Time </li>
-             <li> Number of Failed Subject </li>
-             <li> Weekday Alcohol Consumption </li>
-             <li> Weekend Alcohol Consumption </li>
-             <li> Number of Absences </li>
-             <li> Average Grade </li>
-         </ol>
-</ul>
-<div class="container">
-    <h2 align=center> Our Team Member </h2>
-    <br>
-    <p> Arnold Angelo - 783859 </p>
-    <br>
-    <p> Ethan Cheng - </p>
-    <br>
-    <p> Jorjilou Reyes - 836917 </p>
-    <br>
-</body>
-</html>
-'''
-    return home_page
-
-
 #Home Page
 @app.route('/')
 def homeroute():
@@ -1450,6 +1390,7 @@ def insights():
         <div id="chart9" class="chart" style="width:100%;"></div>
         </div>
     </div>
+    '''
 
 #Function that takes the desired categories, and returns a dictionary of values
 #to put into the chart    
