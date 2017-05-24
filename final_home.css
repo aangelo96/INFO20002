@@ -64,12 +64,50 @@ button {
     align-items:center;
 }
 
+#topbar {
+    height:10vh;
+    width: 100%;
+}
+
+#top {
+  /*background-color: orange;
+  color : #EFEFEF;*/
+  /*border-radius: 8px;
+  border-width: 20px;
+  border-color: blue;*/
+  padding : 14px;
+  font-weight: bold;
+  width: 30px;
+  height: 13px;
+  color: white;
+  border-radius: 8px;
+  /*box-shadow: 10px 0px 14px -7px #276873;
+  text-shadow: 1px 0px 0px #3d768a;*/
+  background-color: orange;
+}
+
+#top:hover {
+  opacity:0.8;
+  background-color: #2E86C1;
+}
+
 #beer {
     width: 50px;
     height: 50px;
     padding-left: 10px;
     /*padding-top: 10px;*/
     position: relative;
+}
+
+.indexdiv {
+    top:20px;
+    white-space: nowrap;
+    position: relative;
+    font-family: 'Raleway', sans-serif;
+    margin: auto;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
 }
 
 hr {
