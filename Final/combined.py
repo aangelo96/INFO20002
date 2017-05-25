@@ -96,7 +96,7 @@ def homeroute():
     <title>Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="final_home2.css">
+    <link rel="stylesheet" href="final_home.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 </head>
 </body>
@@ -595,8 +595,6 @@ def main(pRow, pCol, pAg_val, pAg_operatn, fltr_sec, fltr_sign, fltr_val):
 	user-selected attributes from the columns of data are organized and 
 	aggregated into a 2d data
 	"""
-
-	print pRow, pCol, pAg_val, pAg_operatn, fltr_sec, fltr_sign, fltr_val
 	
 	fltr_lst = [fltr_sec, fltr_sign, fltr_val]
     #opening csv file
@@ -676,7 +674,6 @@ def handler():
 
     #With this function we get an array that contains the processed data
     data_array = main(irow,icol,agg_val,agg_op,fil_sect,fil_sign,fil_val)
-    print data_array
     data = DictReader(open("EditedData3.csv"))
     data = list(data)
 
@@ -798,7 +795,6 @@ def handler():
     html += '</body></html>'
     
     
-    # print(data_array)
     return html % (irow,icol,agg_op, agg_val,fil_sect,fil_sign,fil_val)
 
 #Function that takes the desired categories, and returns a dictionary of values
