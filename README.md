@@ -1,4 +1,4 @@
-��# INFO20002
+# INFO20002
 
 Description :
   A simple web application to create pivot tables and data visualisation in purpose of analyzing the correlation between columns in the data.
